@@ -1,4 +1,4 @@
-set spell spelllang=en_us
+set nocompatible
 set number
 set numberwidth=3
 set ruler
@@ -11,6 +11,8 @@ set tabstop=2
 set softtabstop=2
 set expandtab
 set wildmenu
+set nowrap
+
 colorscheme wombat256mod 
 
 inoremap jk <esc>
