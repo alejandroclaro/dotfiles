@@ -39,5 +39,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'godlygeek/tabular'
 call vundle#end()
 
