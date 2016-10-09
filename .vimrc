@@ -1,5 +1,7 @@
+" Color theme
 colorscheme wombat256mod
 
+" VIM settings
 syntax on
 filetype off
 filetype plugin indent on
@@ -23,16 +25,19 @@ set nrformats=
 set rnu
 set laststatus=2
 
+" Key mapping
 inoremap jk <esc>
 map <F10> :NERDTreeToggle<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
+" Line size limit indicator
 if (exists('+colorcolumn'))
   set colorcolumn=120
   highlight ColorColumn ctermbg=7
 endif
 
+" Show relative or absolute line number
 function ToggleNumbersOn()
   set rnu!
   set nu
@@ -48,8 +53,10 @@ autocmd FocusGained * call ToggleRelativeOn()
 autocmd InsertEnter * call ToggleNumbersOn()
 autocmd InsertLeave * call ToggleRelativeOn()
 
+" Airline plugin configuration
 let g:airline#extensions#tabline#enabled = 1
 
+" Vundle plugin manager configuration
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'a.vim'
