@@ -25,9 +25,14 @@ set nrformats=
 set rnu
 set laststatus=2
 
+set path+=/usr/include/c++/4.8
+
 " Key mapping
 inoremap jk <esc>
-map <F10> :NERDTreeToggle<CR>
+noremap <F10> :NERDTreeToggle<CR>
+noremap <F9>  :A<CR>
+nnoremap <Leader>n :bnext!<CR>
+nnoremap <Leader>p :bprevious!<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
@@ -56,14 +61,25 @@ autocmd InsertLeave * call ToggleRelativeOn()
 " Airline plugin configuration
 let g:airline#extensions#tabline#enabled = 1
 
+" smartgf plugin configuration
+let g:smartgf_create_default_mappings = 0
+nmap gs <Plug>(smartgf-search)
+vmap gs <Plug>(smartgf-search)
+nmap gS <Plug>(smartgf-search-unfiltered)
+vmap gS <Plug>(smartgf-search-unfiltered)
+
+" YCM plugin configuration
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
 " Vundle plugin manager configuration
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'YouCompleteMe'
 Plugin 'a.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'ctrlp.vim'
 Plugin 'godlygeek/tabular'
+Plugin 'gorkunov/smartgf.vim'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'rainbow_parentheses.vim'
