@@ -74,21 +74,29 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 " Vundle plugin manager configuration
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'YouCompleteMe'
 Plugin 'a.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'fholgado/minibufexpl.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'gorkunov/smartgf.vim'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'mbbill/undotree'
+Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'rainbow_parentheses.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 Plugin 'ShowTrailingWhitespace'
 Plugin 'StripWhiteSpaces'
-Plugin 'The-NERD-tree'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'wincent/command-t'
+Plugin 'severin-lemaignan/vim-minimap'
 call vundle#end()
+
 

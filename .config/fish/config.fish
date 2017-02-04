@@ -55,3 +55,6 @@ end
 function localip
   ifconfig eth0 | grep 'inet addr' | awk '{print $2}' | sed s/addr://
 end
+
+eval (thefuck --alias | tr '\n' ';')
+
