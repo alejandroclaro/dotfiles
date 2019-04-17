@@ -1,0 +1,27 @@
+[global_config]
+  borderless = True
+  enabled_plugins = ,
+  scroll_tabbar = True
+  title_receive_bg_color = "#4e9a06"
+  title_transmit_bg_color = "#204a87"
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#300a24"
+    background_darkness = 0.75
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    foreground_color = "#ffffff"
+    icon_bell = False
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    visible_bell = True
