@@ -2,26 +2,41 @@ set $mod Mod4
 set $alt Mod1
 
 font pango: FontAwesome 10
+#workspace_layout tabbed
 
 # Set default windows icons
-set $workspace1 "1:"
-set $workspace2 "2:"
-set $workspace3 "3:"
-set $workspace4 "4:"
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
+set $workspace10 "10: "
 
 # Startup programs
-assign [class="Firefox"] $workspace2
-assign [class="Slack"] $workspace3
+assign [class="Firefox"] $workspace3
+assign [class="Slack"] $workspace4
 assign [class="Skype"] $workspace4
+for_window [class = "Spotify"] move to workspace $workspace5
+assign [class="clion"] $workspace10
 
-exec --no-startup-id feh --bg-fill ~/Pictures/Background.jpg
 exec --no-startup-id xsettingsd &
 exec --no-startup-id compton -b
+exec --no-startup-id caffeine
 exec --no-startup-id "setxkbmap -layout us,es -option 'grp:ctrl_alt_toggle'"
+exec --no-startup-id start-pulseaudio-x11
+exec --no-startup-id clipit -d
+exec --no-startup-id dropbox start
 exec --no-startup-id i3-msg 'workspace $workspace1; exec terminator'
+exec --no-startup-id nitrogen --restore
 exec firefox
 exec slack
 exec skype
+exec spotify
+exec clion
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -33,8 +48,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
 
-# start dmenu (a program launcher)
-
+# start program launcher
 bindsym $mod+d exec --no-startup-id "rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'FontAwesome 8'"
 
 # change focus
@@ -85,41 +99,43 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # switch to workspace
-bindsym $alt+Control+Right workspace next
-bindsym $alt+Control+Left workspace prev
+bindsym $mod+Control+Right workspace next
+bindsym $mod+Control+Left workspace prev
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# move focused workspace to display
+bindsym $mod+Control+1 move workspace to output up
+bindsym $mod+Control+2 move workspace to output down
 
 # Application shortcuts
-bindsym $mod+q exec i3lock -i ~/Pictures/Background.jpg
+bindsym $mod+q exec i3lock-fancy -g
 bindsym $mod+b exec firefox
 
-# Toggle keyboard layouts
-
-
 # Pulse Audio controls
-bindcode $mod+68 exec amixer set Master 5%- && pkill -RTMIN+10 i3blocks
-bindcode $mod+69 exec amixer set Master 5%+ && pkill -RTMIN+10 i3blocks
+bindcode $mod+67 exec pulsemixer --toggle-mute && pkill -RTMIN+10 i3blocks
+bindcode $mod+68 exec pulsemixer --change-volume -5 && pkill -RTMIN+10 i3blocks
+bindcode $mod+69 exec pulsemixer --change-volume +5 && pkill -RTMIN+10 i3blocks
 
 # Sreen brightness controls
 bindcode $mod+95 exec xbacklight -inc 1
@@ -157,5 +173,6 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   status_command i3blocks
+  tray_output none
 }
 

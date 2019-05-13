@@ -1,40 +1,200 @@
-" Color theme
+" Theme configuration
+" Nerd HACK font shall be installed and configured in the terminal emulator.
+" https://github.com/ryanoasis/nerd-fonts/releases/
 colorscheme wombat256mod
+set guifont=Hack\ Regular\ Nerd\ Font\ Complete\ Mono
 
-" VIM settings
+" Basic configuration
 syntax on
 filetype off
 filetype plugin indent on
 
 set shell=/bin/bash
 set term=screen-256color
+set encoding=utf-8
+set t_Co=256
 set nocompatible
+set hidden
 set textwidth=0 wrapmargin=0
 set formatoptions-=t
 set numberwidth=3
 set ruler
 set hlsearch
 set expandtab
+set smarttab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set expandtab
 set wildmenu
 set nowrap
 set nrformats=
 set rnu
 set laststatus=2
+set pastetoggle=<F2>
 
-set path+=/usr/include/c++/4.8
+" Vundle plugin manager configuration
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'airblade/vim-gitgutter'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'Conque-GDB'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'delimitMate.vim'
+Plugin 'derekwyatt/vim-fswitch'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'fatih/vim-go'
+Plugin 'godlygeek/tabular'
+Plugin 'JuliaLang/julia-vim'
+Plugin 'liuchengxu/vim-which-key'
+Plugin 'mbbill/undotree'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'powerline/powerline-fonts'
+Plugin 'rainbow_parentheses.vim'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'severin-lemaignan/vim-minimap'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'valloric/youcompleteme'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'VundleVim/Vundle.vim'
+call vundle#end()
 
-" Key mapping
-inoremap jk <esc>
-noremap <F10> :NERDTreeToggle<CR>
-noremap <F9>  :A<CR>
-nnoremap <Leader>n :bnext!<CR>
-nnoremap <Leader>p :bprevious!<CR>
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
+" Leader key
+let mapleader=','
+nnoremap <silent> <leader> :WhichKey ','<CR>
+
+" Quick ESC
+inoremap jk <ESC>
+inoremap kj <ESC>
+
+" Disable arrows
+nnoremap <Left>  :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up>    :echoe "Use k"<CR>
+nnoremap <Down>  :echoe "Use j"<CR>
+inoremap <Left> <nop>
+inoremap <Right> <nop>
+inoremap <Up> <nop>
+inoremap <Down> <nop>
+
+" Fix yank and delete
+nnoremap Y y$
+nnoremap D d$
+
+" Quick macros
+nnoremap Q @q
+vnoremap Q :norm @q<CR>
+
+" Quick save
+nnoremap <leader>s :w<cr>
+inoremap <leader>s <C-c>:w<cr>
+
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" Easy buffer navigation
+nmap <leader>T :enew<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <Space> :FSHere<CR>
+nnoremap <C-@> gf
+
+" Git gutter configuration
+let g:gitgutter_enabled = 1
+let g:gitgutter_eager = 0
+let g:gitgutter_max_signs = 1000
+
+" Undotree Setting
+map <leader>u :UndotreeToggle<CR>
+let g:undotree_ShortIndicators = 30
+
+" Nerd tree configuration
+noremap <F3> :NERDTreeToggle<CR>
+let NERDTreeHighlightCursorline = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDChristmasTree = 1
+let NERDTreeChDirMode = 2
+
+" Nerd commenter configuration
+let g:NERDSpaceDelims = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+
+" Airline plugin configuration
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" minimap configuration
+au VimEnter * Minimap
+
+" rainbow parentheses configuration
+au VimEnter * RainbowParenthesesToggle
+
+" indent guides configuration
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+" Better whitespace configuration
+let g:better_whitespace_enabled = 1
+let g:strip_whitespace_on_save = 1
+
+" YCM plugin configuration
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <F4> :YcmDiags<CR>
+
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_max_diagnostics_to_display = 10
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_auto_trigger = 1
+set path+=/usr/include/c++/7
+
+" CtrlP configuration
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+\ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
+
+" Easy motion configuration
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_mapping = 1
+let g:EasyMotion_use_smartsign_us = 1
+
+nmap <leader>f <Plug>(easymotion-f)
+xmap <leader>f <Plug>(easymotion-f)
+nmap <leader>F <Plug>(easymotion-F)
+xmap <leader>F <Plug>(easymotion-F)
+nmap <leader>t <Plug>(easymotion-t)
+xmap <leader>t <Plug>(easymotion-t)
+nmap <leader>T <Plug>(easymotion-T)
+xmap <leader>T <Plug>(easymotion-T)
+
+" ConqueGDB configuration
+let g:ConqueTerm_Color = 2
+let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_StartMessages = 0
 
 " Line size limit indicator
 if (exists('+colorcolumn'))
@@ -53,50 +213,8 @@ function ToggleRelativeOn()
   set rnu
 endfunction
 
-autocmd FocusLost * call ToggleNumbersOn()
-autocmd FocusGained * call ToggleRelativeOn()
-autocmd InsertEnter * call ToggleNumbersOn()
-autocmd InsertLeave * call ToggleRelativeOn()
-
-" Airline plugin configuration
-let g:airline#extensions#tabline#enabled = 1
-
-" smartgf plugin configuration
-let g:smartgf_create_default_mappings = 0
-nmap gs <Plug>(smartgf-search)
-vmap gs <Plug>(smartgf-search)
-nmap gS <Plug>(smartgf-search-unfiltered)
-vmap gS <Plug>(smartgf-search-unfiltered)
-
-" YCM plugin configuration
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-
-" Vundle plugin manager configuration
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'a.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'gorkunov/smartgf.vim'
-Plugin 'JuliaLang/julia-vim'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'mbbill/undotree'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'rainbow_parentheses.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ShowTrailingWhitespace'
-Plugin 'StripWhiteSpaces'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'wincent/command-t'
-Plugin 'severin-lemaignan/vim-minimap'
-call vundle#end()
-
+au FocusLost * call ToggleNumbersOn()
+au FocusGained * call ToggleRelativeOn()
+au InsertEnter * call ToggleNumbersOn()
+au InsertLeave * call ToggleRelativeOn()
 
