@@ -67,8 +67,10 @@ Plugin 'VundleVim/Vundle.vim'
 call vundle#end()
 
 " Leader key
-let mapleader=','
-nnoremap <silent> <leader> :WhichKey ','<CR>
+let mapleader = "\<Space>"
+let maplocalleader = '\'
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :WhichKey '\'<CR>
 
 " Quick ESC
 inoremap jk <ESC>
@@ -94,7 +96,6 @@ vnoremap Q :norm @q<CR>
 
 " Quick save
 nnoremap <leader>s :w<cr>
-inoremap <leader>s <C-c>:w<cr>
 
 " Easy window navigation
 map <C-h> <C-w>h
@@ -102,12 +103,24 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+for s:i in range(1, 4)
+  execute 'nnoremap <Leader>' . s:i . ' :' . s:i . 'wincmd w<CR>'
+endfor
+
 " Easy buffer navigation
 nmap <leader>T :enew<CR>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
-nnoremap <Space> :FSHere<CR>
+nnoremap <leader><Tab> :FSHere<CR>
 nnoremap <C-@> gf
+
+" Easy move lines
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Git gutter configuration
 let g:gitgutter_enabled = 1
@@ -153,10 +166,10 @@ let g:better_whitespace_enabled = 1
 let g:strip_whitespace_on_save = 1
 
 " YCM plugin configuration
+nmap <F4> :YcmDiags<CR>
 nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nmap <F4> :YcmDiags<CR>
 
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_max_diagnostics_to_display = 10
@@ -192,6 +205,7 @@ nmap <leader>T <Plug>(easymotion-T)
 xmap <leader>T <Plug>(easymotion-T)
 
 " ConqueGDB configuration
+let g:ConqueGdb_Leader = '<localleader>'
 let g:ConqueTerm_Color = 2
 let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_StartMessages = 0
