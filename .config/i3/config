@@ -20,8 +20,10 @@ set $workspace10 "10: "
 assign [class="Firefox"] $workspace3
 assign [class="Slack"] $workspace4
 assign [class="Skype"] $workspace4
+assign [class="teams-for-linux"] $workspace4
 for_window [class = "Spotify"] move to workspace $workspace5
 assign [class="clion"] $workspace10
+assign [class="Code"] $workspace10
 
 exec --no-startup-id xsettingsd &
 exec --no-startup-id compton -b
@@ -33,10 +35,25 @@ exec --no-startup-id dropbox start
 exec --no-startup-id i3-msg 'workspace $workspace1; exec terminator'
 exec --no-startup-id nitrogen --restore
 exec firefox
-exec slack
+exec teams-for-linux
 exec skype
 exec spotify
-exec clion
+exec code
+
+# Floating mode application
+for_window [class="Electron" instance="electron"] floating enable
+for_window [class="application" instance="application"] floating enable
+
+for_window [class="Gcalculator"] floating enable
+for_window [class="Gnome-calculator"] floating enable
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_role="About"] floating enable
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -127,6 +144,8 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # move focused workspace to display
 bindsym $mod+Control+1 move workspace to output up
 bindsym $mod+Control+2 move workspace to output down
+bindsym $mod+Control+3 move workspace to output left
+bindsym $mod+Control+4 move workspace to output right
 
 # Application shortcuts
 bindsym $mod+q exec i3lock-fancy -g
