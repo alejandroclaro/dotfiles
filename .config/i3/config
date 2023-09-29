@@ -1,7 +1,12 @@
 set $mod Mod4
 set $alt Mod1
 
-font pango: FontAwesome 10
+# gaps
+for_window [class="^.*"] border none
+gaps inner 5
+gaps outer 5
+
+font pango: FontAwesome 11
 #workspace_layout tabbed
 
 # Set default windows icons
@@ -57,6 +62,9 @@ for_window [window_role="About"] floating enable
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+default_floating_border normal
+
+bindsym $mod+Shift+b border toggle
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -74,7 +82,7 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys
+# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -86,7 +94,7 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys
+# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -160,6 +168,13 @@ bindcode $mod+69 exec pulsemixer --change-volume +5 && pkill -RTMIN+10 i3blocks
 bindcode $mod+95 exec xbacklight -inc 1
 bindcode $mod+96 exec xbacklight -dec 1
 
+# Screenshoot and drawing
+bindsym $mod+Shift+s exec --no-startup-id "flameshot gui"
+
+# Focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -193,5 +208,14 @@ bindsym $mod+r mode "resize"
 bar {
   status_command i3blocks
   tray_output none
+  colors {
+    background #002b36
+    separator #268bd2
+    statusline #839496
+    focused_workspace #fdf6e3 #6c71c4 #fdf6e3
+    active_workspace #fdf6e3 #6c71c4 #fdf6e3
+    inactive_workspace #002b36 #586e75 #002b36
+    urgent_workspace #d33682 #d33682 #fdf6e3
+  }
 }
 
