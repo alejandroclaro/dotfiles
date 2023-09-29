@@ -37,12 +37,13 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'Conque-GDB'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'delimitMate.vim'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'fatih/vim-go'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'liuchengxu/vim-which-key'
@@ -204,11 +205,9 @@ xmap <leader>t <Plug>(easymotion-t)
 nmap <leader>T <Plug>(easymotion-T)
 xmap <leader>T <Plug>(easymotion-T)
 
-" ConqueGDB configuration
-let g:ConqueGdb_Leader = '<localleader>'
-let g:ConqueTerm_Color = 2
-let g:ConqueTerm_CloseOnEnd = 1
-let g:ConqueTerm_StartMessages = 0
+" GDB
+let g:termdebug_popup = 0
+let g:termdebug_wide = 163
 
 " Line size limit indicator
 if (exists('+colorcolumn'))

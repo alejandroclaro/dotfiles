@@ -10,36 +10,46 @@ interval=once
 signal=10
 
 [iface]
-LABEL=
-IFACE=enp0s31f6
+label=
+IFACE=enx98e743ab99c9
 color=#00FF00
 interval=10
 
 [iface]
-LABEL=
-IFACE=wlp2s0
+label=
+IFACE=wlo1
 color=#00FFFF
 interval=10
 
 [wifi]
-INTERFACE=wlp2s0
+INTERFACE=wlo1
 interval=60
 
 [nm-vpn]
+label=VPN 
 interval=5
 
 [bluetooth]
 interval=10
 
-[battery]
-markup=pango
+[cpu_usage]
+interval=10
+label=🔥 
+DECIMALS=1
+
+[memory]
+label=🐏 
 interval=30
 
+[battery]
+interval=30
+label=⚡ 
+
 [rofi-calendar]
-LABEL=
+label=
 interval=3600
 
 [time]
-command=echo -n "  "; date '+%r'
+command=echo -n " "; date '+%r'
 interval=5
 

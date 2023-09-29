@@ -3,15 +3,15 @@
 
 set -a
 
-AUDIO_HIGH_SYMBOL=${AUDIO_HIGH_SYMBOL:-'  '}
+AUDIO_HIGH_SYMBOL=${AUDIO_HIGH_SYMBOL:-''}
 
 AUDIO_MED_THRESH=${AUDIO_MED_THRESH:-50}
-AUDIO_MED_SYMBOL=${AUDIO_MED_SYMBOL:-'  '}
+AUDIO_MED_SYMBOL=${AUDIO_MED_SYMBOL:-''}
 
 AUDIO_LOW_THRESH=${AUDIO_LOW_THRESH:-0}
-AUDIO_LOW_SYMBOL=${AUDIO_LOW_SYMBOL:-'  '}
+AUDIO_LOW_SYMBOL=${AUDIO_LOW_SYMBOL:-''}
 
-AUDIO_MUTED_SYMBOL=${AUDIO_MUTED_SYMBOL:-'  '}
+AUDIO_MUTED_SYMBOL=${AUDIO_MUTED_SYMBOL:-''}
 
 AUDIO_DELTA=${AUDIO_DELTA:-5}
 
@@ -48,7 +48,7 @@ while getopts F:Sf:adH:M:L:X:T:t:C:c:i:m:s:h opt; do
         s) SCONTROL="$OPTARG" ;;
         h) printf \
 "Usage: volume-pulseaudio [-S] [-F format] [-f format] [-p] [-a|-d] [-H symb] [-M symb]
-        [-L symb] [-X symb] [-T thresh] [-t thresh] [-C color] [-c color] [-i inter] 
+        [-L symb] [-X symb] [-T thresh] [-t thresh] [-C color] [-c color] [-i inter]
         [-m mixer] [-s scontrol] [-h]
 Options:
 -F, -f\tOutput format (-F long format, -f short format) to use, with exposed variables:

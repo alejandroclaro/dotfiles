@@ -52,9 +52,7 @@ function rd
   rmdir $argv
 end
 
-function localip
-  ifconfig eth0 | grep 'inet addr' | awk '{print $2}' | sed s/addr://
-end
-
 eval (thefuck --alias | tr '\n' ';')
+
+source /usr/share/fish/vendor_functions.d/fzf_key_bindings.fish
 
