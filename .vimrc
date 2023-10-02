@@ -42,17 +42,17 @@ Plugin 'delimitMate.vim'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'fatih/vim-go'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'JuliaLang/julia-vim'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 Plugin 'liuchengxu/vim-which-key'
+Plugin 'luochen1990/rainbow'
 Plugin 'mbbill/undotree'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'powerline/powerline-fonts'
-Plugin 'rainbow_parentheses.vim'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
@@ -109,10 +109,13 @@ for s:i in range(1, 4)
 endfor
 
 " Easy buffer navigation
-nmap <leader>T :enew<CR>
+nmap <leader>E :enew<CR>
+nnoremap <leader>bd :Bclose<CR>
+nnoremap <leader>ls :ls<CR>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 nnoremap <leader><Tab> :FSHere<CR>
+
 nnoremap <C-@> gf
 
 " Easy move lines
@@ -146,6 +149,13 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
+" fzf configuration
+let g:fzf_layout = { 'down': '40%' }
+noremap <silent> <leader>o :GitFiles<CR>
+noremap <silent> <leader>g :Ag<CR>
+noremap <silent> <leader>O :Files<CR>
+noremap <silent> <leader>b :Buffers<CR>
+
 " Airline plugin configuration
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -155,12 +165,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 au VimEnter * Minimap
 
 " rainbow parentheses configuration
-au VimEnter * RainbowParenthesesToggle
+let g:rainbow_active = 1
 
 " indent guides configuration
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+let g:indent_guides_guide_size = 2
 
 " Better whitespace configuration
 let g:better_whitespace_enabled = 1
@@ -208,6 +218,15 @@ xmap <leader>T <Plug>(easymotion-T)
 " GDB
 let g:termdebug_popup = 0
 let g:termdebug_wide = 163
+
+" clang format
+if has('python')
+  map <C-f> :pyf /usr/share/clang/clang-format-15/clang-format.py<cr>
+  imap <C-f> <c-o>:pyf /usr/share/clang/clang-format-15/clang-format.py<cr>
+elseif has('python3')
+  map <C-f> :py3f /usr/share/clang/clang-format-15/clang-format.py<cr>
+  imap <C-f> <c-o>:py3f /usr/share/clang/clang-format-15/clang-format.py<cr>
+endif
 
 " Line size limit indicator
 if (exists('+colorcolumn'))
