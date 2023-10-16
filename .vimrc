@@ -2,7 +2,9 @@
 " Nerd HACK font shall be installed and configured in the terminal emulator.
 " https://github.com/ryanoasis/nerd-fonts/releases/
 colorscheme wombat256mod
-set guifont=Hack\ Regular\ Nerd\ Font\ Complete\ Mono
+
+" set guifont=Hack\ Regular\ Nerd\ Font\ Complete\ Mono
+set guifont=DroidSansMono\ Nerd\ Font\ 11
 
 " Basic configuration
 syntax on
@@ -35,6 +37,7 @@ set pastetoggle=<F2>
 " Vundle plugin manager configuration
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'alejandroclaro/vim-ai-assistant'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -42,7 +45,9 @@ Plugin 'delimitMate.vim'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'fatih/vim-go'
+Plugin 'rhysd/vim-grammarous'
 Plugin 'godlygeek/tabular'
+Plugin 'haya14busa/incsearch.vim'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
@@ -53,7 +58,6 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'powerline/powerline-fonts'
-Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'severin-lemaignan/vim-minimap'
@@ -65,6 +69,8 @@ Plugin 'valloric/youcompleteme'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
 
 " Leader key
@@ -118,6 +124,14 @@ nnoremap <leader><Tab> :FSHere<CR>
 
 nnoremap <C-@> gf
 
+" Clipboard keymaps
+nnoremap <Leader>y "+y
+vnoremap <Leader>y "+ygv
+nnoremap <Leader>Y "+Y
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+inoremap <C-v> <ESC>"+pa
+"
 " Easy move lines
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
@@ -126,22 +140,46 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+" Improve searching
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
 " Git gutter configuration
 let g:gitgutter_enabled = 1
 let g:gitgutter_eager = 0
 let g:gitgutter_max_signs = 1000
 
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '>'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = '<'
+
+let g:gitgutter_override_sign_column_highlight = 1
+highlight SignColumn guibg=bg
+highlight SignColumn ctermbg=bg
+
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+
+set statusline+=%{GitStatus()}
+
 " Undotree Setting
-map <leader>u :UndotreeToggle<CR>
 let g:undotree_ShortIndicators = 30
 
+map <leader>u :UndotreeToggle<CR>
+
 " Nerd tree configuration
-noremap <F3> :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDChristmasTree = 1
 let NERDTreeChDirMode = 2
+
+noremap <F3> :NERDTreeFind<CR>
 
 " Nerd commenter configuration
 let g:NERDSpaceDelims = 1
@@ -149,10 +187,11 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
-" fzf configuration
+" FZF configuration
 let g:fzf_layout = { 'down': '40%' }
+
+noremap <silent> <C-t> :FZF<CR>
 noremap <silent> <leader>o :GitFiles<CR>
-noremap <silent> <leader>g :Ag<CR>
 noremap <silent> <leader>O :Files<CR>
 noremap <silent> <leader>b :Buffers<CR>
 
@@ -161,13 +200,13 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-" minimap configuration
+" Minimap configuration
 au VimEnter * Minimap
 
 " rainbow parentheses configuration
 let g:rainbow_active = 1
 
-" indent guides configuration
+" Indent guides configuration
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 2
@@ -178,16 +217,17 @@ let g:strip_whitespace_on_save = 1
 
 " YCM plugin configuration
 nmap <F4> :YcmDiags<CR>
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gh :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_max_diagnostics_to_display = 10
+let g:ycm_max_diagnostics_to_display = 30
 let g:ycm_show_diagnostics_ui = 1
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_auto_trigger = 1
-set path+=/usr/include/c++/7
+let g:ycm_clangd_args=['--header-insertion=never']
+set path+=/usr/include/c++/9
 
 " CtrlP configuration
 let g:ctrlp_map = '<c-p>'
@@ -215,11 +255,17 @@ xmap <leader>t <Plug>(easymotion-t)
 nmap <leader>T <Plug>(easymotion-T)
 xmap <leader>T <Plug>(easymotion-T)
 
+" Grammarous configuration
+let g:grammarous#jar_url = 'https://www.languagetool.org/download/LanguageTool-5.9.zip'
+let g:grammarous#default_comments_only_filetypes = { '*' : 1, 'help' : 0, 'markdown' : 0, }
+
 " GDB
 let g:termdebug_popup = 0
 let g:termdebug_wide = 163
 
-" clang format
+packadd! termdebug
+
+" Clang format
 if has('python')
   map <C-f> :pyf /usr/share/clang/clang-format-15/clang-format.py<cr>
   imap <C-f> <c-o>:pyf /usr/share/clang/clang-format-15/clang-format.py<cr>
@@ -231,8 +277,14 @@ endif
 " Line size limit indicator
 if (exists('+colorcolumn'))
   set colorcolumn=120
-  highlight ColorColumn ctermbg=7
+  highlight ColorColumn ctermbg=236
 endif
+
+" fix quicklist window position
+augroup DragQuickfixWindowDown
+    autocmd!
+    autocmd FileType qf wincmd J
+augroup end
 
 " Show relative or absolute line number
 function ToggleNumbersOn()

@@ -81,4 +81,5 @@ function! s:Bclose(bang, buffer)
 endfunction
 
 command! -bang -complete=buffer -nargs=? Bclose call <SID>Bclose(<q-bang>, <q-args>)
+command! -bang -complete=buffer -nargs=? Bonly silent! execute "%bd|e#|bd#"
 

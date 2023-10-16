@@ -18,16 +18,14 @@ set $workspace5 "5: "
 set $workspace6 "6"
 set $workspace7 "7"
 set $workspace8 "8"
-set $workspace9 "9"
+set $workspace9 "9: "
 set $workspace10 "10: "
 
 # Startup programs
+assign [class="com.cisco.anyconnect.gui"] $workspace2
 assign [class="Firefox"] $workspace3
-assign [class="Slack"] $workspace4
-assign [class="Skype"] $workspace4
-assign [class="teams-for-linux"] $workspace4
-for_window [class = "Spotify"] move to workspace $workspace5
-assign [class="clion"] $workspace10
+assign [title="^Microsoft Teams"] $workspace4
+assign [class = "Spotify"]  $workspace5
 assign [class="Code"] $workspace10
 
 exec --no-startup-id xsettingsd &
@@ -37,18 +35,16 @@ exec --no-startup-id "setxkbmap -layout us,es -option 'grp:ctrl_alt_toggle'"
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id clipit -d
 exec --no-startup-id dropbox start
-exec --no-startup-id i3-msg 'workspace $workspace1; exec terminator'
 exec --no-startup-id nitrogen --restore
-exec firefox
-exec teams-for-linux
-exec skype
-exec spotify
-exec code
+exec --no-startup-id i3-msg 'workspace $workspace1; exec xterm -title "workspace 1"'
+exec --no-startup-id i3-msg 'workspace $workspace2; exec /opt/cisco/anyconnect/bin/vpnui'
+exec --no-startup-id i3-msg 'workspace $workspace3; exec firefox'
+exec --no-startup-id i3-msg 'workspace $workspace4; exec google-chrome --app="https://teams.microsoft.com"'
+exec --no-startup-id i3-msg 'workspace $workspace5; exec spotify'
+exec --no-startup-id i3-msg 'workspace $workspace9; exec xterm -title "workspace 9"'
+exec --no-startup-id i3-msg 'workspace $workspace10; exec xterm -title "workspace 10"'
 
 # Floating mode application
-for_window [class="Electron" instance="electron"] floating enable
-for_window [class="application" instance="application"] floating enable
-
 for_window [class="Gcalculator"] floating enable
 for_window [class="Gnome-calculator"] floating enable
 
@@ -59,6 +55,15 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 for_window [window_role="About"] floating enable
+
+
+for_window [class = "XTerm$" title="^workspace 1$"] move to workspace $workspace1
+for_window [class="com.cisco.anyconnect.gui"] move to workspace $workspace2
+for_window [title="^Microsoft Teams"] move to workspace $workspace4
+for_window [title="^Microsoft Teams"] floating disable, border none
+for_window [class = "XTerm$" title="^workspace 9$"] move to workspace $workspace9
+for_window [class = "XTerm$" title="^workspace 10$"] move to workspace $workspace10
+for_window [class = "Spotify"] move to workspace $workspace5
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
