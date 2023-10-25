@@ -1,0 +1,21 @@
+[user]
+	email = alejandro.claro@smartmatic.com
+	name = Alejandro Claro
+[core]
+	editor = vim
+	pager = delta
+[diff]
+	colorMoved = default
+	tool = vimdiff
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+[merge]
+	tool = vimdiff
+	conflictstyle=diff3
+[delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = true
+	syntax-theme = Dracula
+[cola]
+	spellcheck = true

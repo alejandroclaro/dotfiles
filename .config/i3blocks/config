@@ -50,6 +50,11 @@ label=
 interval=3600
 
 [time]
+label=PTY 
+command=TZ=":America/Panama" date '+%r'
+interval=60
+
+[time]
 command=echo -n " "; date '+%r'
 interval=5
 

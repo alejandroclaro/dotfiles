@@ -36,13 +36,13 @@ exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id clipit -d
 exec --no-startup-id dropbox start
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id i3-msg 'workspace $workspace1; exec xterm -title "workspace 1"'
+exec --no-startup-id i3-msg 'workspace $workspace1; exec xterm -title "workspace 1" -e tmux new -s "terminal"'
 exec --no-startup-id i3-msg 'workspace $workspace2; exec /opt/cisco/anyconnect/bin/vpnui'
 exec --no-startup-id i3-msg 'workspace $workspace3; exec firefox'
 exec --no-startup-id i3-msg 'workspace $workspace4; exec google-chrome --app="https://teams.microsoft.com"'
 exec --no-startup-id i3-msg 'workspace $workspace5; exec spotify'
-exec --no-startup-id i3-msg 'workspace $workspace9; exec xterm -title "workspace 9"'
-exec --no-startup-id i3-msg 'workspace $workspace10; exec xterm -title "workspace 10"'
+exec --no-startup-id i3-msg 'workspace $workspace9; exec xterm -title "workspace 9" -e tmux new -s "coding 1"'
+exec --no-startup-id i3-msg 'workspace $workspace10; exec xterm -title "workspace 10" -e tmux new -s "coding 2"'
 
 # Floating mode application
 for_window [class="Gcalculator"] floating enable
