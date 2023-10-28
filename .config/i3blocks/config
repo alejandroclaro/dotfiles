@@ -55,6 +55,16 @@ command=TZ=":America/Panama" date '+%r'
 interval=60
 
 [time]
+label=MIA 
+command=TZ=":America/New_York" date '+%r'
+interval=60
+
+[time]
+label=TPE 
+command=TZ=":Asia/Taipei" date '+%r'
+interval=60
+
+[time]
 command=echo -n " "; date '+%r'
 interval=5
 
