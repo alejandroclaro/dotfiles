@@ -8,7 +8,6 @@ filetype off
 filetype plugin indent on
 
 set shell=/bin/bash
-set term=screen-256color
 set encoding=utf-8
 set t_Co=256
 set nocompatible
@@ -31,12 +30,9 @@ set noro
 set laststatus=2
 set pastetoggle=<F2>
 
-" Color scheme
-"let g:solarized_termcolors=256
-set background=dark
-set guifont=Hack\ Nerd\ Font
-
-colorscheme solarized
+if $TERM =~# '\v(tmux-256color)'
+  set term=xterm-256color
+endif
 
 " Leader key
 let mapleader = "\<Space>"
@@ -81,6 +77,7 @@ nnoremap <S-Tab> :bprevious<CR>
 nnoremap <leader><Tab> :FSHere<CR>
 
 nnoremap <C-@> gf
+nnoremap <C-#> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gh :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -141,12 +138,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'airblade/vim-gitgutter'
 Plugin 'alejandroclaro/vim-ai-assistant'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'bfrg/vim-cpp-modern'
 Plugin 'cdelledonne/vim-cmake'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'delimitMate.vim'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'fatih/vim-go'
 Plugin 'godlygeek/tabular'
 Plugin 'haya14busa/incsearch.vim'
@@ -158,12 +157,12 @@ Plugin 'luochen1990/rainbow'
 Plugin 'mbbill/undotree'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'powerline/powerline-fonts'
 Plugin 'rhysd/vim-grammarous'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-obsession'
@@ -178,6 +177,10 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
+
+" Color scheme
+set guifont=Hack\ Nerd\ Font
+colorscheme dracula
 
 " Git gutter configuration
 let g:gitgutter_enabled = 1
@@ -229,7 +232,7 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 " FZF configuration
-let g:fzf_layout = { 'down': '40%' }
+"let g:fzf_layout = { 'down': '40%' }
 
 " Airline plugin configuration
 let g:airline_powerline_fonts = 1
@@ -240,8 +243,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:minimap_auto_start = 1
 let g:minimap_git_colors = 1
 
-" rainbow parentheses configuration
+" rainbow parentheses and highlight enhancement
 let g:rainbow_active = 1
+let g:rainbow_conf = { 'ctermfgs': [ '33', '226', '112', '165', '231' ] }
 
 " Indent guides configuration
 let g:indent_guides_enable_on_vim_startup = 1

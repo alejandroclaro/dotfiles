@@ -9,4 +9,4 @@ configuration {
   }
 }
 
-@theme "~/.config/rofi/themes/squared-nord.rasi"
+@theme "~/.config/rofi/themes/dracula.rasi"

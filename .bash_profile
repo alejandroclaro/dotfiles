@@ -3,6 +3,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib;
 export FZF_DEFAULT_OPTS='--height 40% --border'
 export TERMINAL=xterm
 
+. "$HOME/.cargo/env"
+
 for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done
@@ -15,3 +17,4 @@ shopt -s histappend;
 shopt -s cdspell;
 
 eval $(thefuck --alias)
+
