@@ -7,3 +7,5 @@ export NVM_DIR="/home/aclaro/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 . "$HOME/.cargo/env"
+source ~/.bash_git
+source ~/.bash_profile;

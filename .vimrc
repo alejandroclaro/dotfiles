@@ -70,7 +70,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-nmap <leader>E :enew<CR>
+nnoremap <leader>E :enew<CR>
 nnoremap <leader>bd :Bclose<CR>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
@@ -119,19 +119,19 @@ noremap <silent> <leader>b :Buffers<CR>
 nnoremap <leader>W :StripWhitespace<CR>
 
 if has('python')
-  map <C-f> :pyf /usr/share/clang/clang-format-15/clang-format.py<CR>
-  imap <C-f> <C-o>:pyf /usr/share/clang/clang-format-15/clang-format.py<CR>
+  noremap <C-f> :pyf /usr/share/clang/clang-format-15/clang-format.py<CR>
+  inoremap <C-f> <C-o>:pyf /usr/share/clang/clang-format-15/clang-format.py<CR>
 elseif has('python3')
-  map <C-f> :py3f /usr/share/clang/clang-format-15/clang-format.py<CR>
-  imap <C-f> <C-o>:py3f /usr/share/clang/clang-format-15/clang-format.py<CR>
+  noremap <C-f> :py3f /usr/share/clang/clang-format-15/clang-format.py<CR>
+  inoremap <C-f> <C-o>:py3f /usr/share/clang/clang-format-15/clang-format.py<CR>
 endif
 
-nmap <leader>u :UndotreeToggle<CR>
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>N :NERDTreeFind<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>N :NERDTreeFind<CR>
 
-nmap <leader>D <Plug>(YCMHover)
-nmap <F12> :YcmDiags<CR>
+nnoremap <leader>D <Plug>(YCMHover)
+nnoremap <F12> :YcmDiags<CR>
 
 " Vundle plugin manager configuration
 set rtp+=~/.vim/bundle/Vundle.vim

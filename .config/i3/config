@@ -24,7 +24,6 @@ set $workspace10 "10: "
 # Startup programs
 assign [class="com.cisco.anyconnect.gui"] $workspace2
 assign [class="Firefox"] $workspace3
-assign [title="^Microsoft Teams"] $workspace4
 assign [class = "Spotify"]  $workspace5
 assign [class="Code"] $workspace10
 
@@ -37,7 +36,6 @@ exec --no-startup-id clipit -d
 exec --no-startup-id dropbox start
 exec --no-startup-id autorandr --change
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id gromit-mpx &
 exec --no-startup-id i3-msg 'workspace $workspace1; exec xterm -title "workspace 1" -e tmux new -s "terminal"'
 exec --no-startup-id i3-msg 'workspace $workspace2; exec /opt/cisco/anyconnect/bin/vpnui'
 exec --no-startup-id i3-msg 'workspace $workspace3; exec firefox'
@@ -49,6 +47,7 @@ exec --no-startup-id i3-msg 'workspace $workspace10; exec xterm -title "workspac
 # Floating mode application
 for_window [class="Gcalculator"] floating enable
 for_window [class="Gnome-calculator"] floating enable
+for_window [title="^Microsoft Teams"] floating disable, border none
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
@@ -61,8 +60,8 @@ for_window [window_role="About"] floating enable
 
 for_window [class = "XTerm$" title="^workspace 1$"] move to workspace $workspace1
 for_window [class="com.cisco.anyconnect.gui"] move to workspace $workspace2
+for_window [title="^email -"] move to workspace $workspace2
 for_window [title="^Microsoft Teams"] move to workspace $workspace4
-for_window [title="^Microsoft Teams"] floating disable, border none
 for_window [class = "XTerm$" title="^workspace 9$"] move to workspace $workspace9
 for_window [class = "XTerm$" title="^workspace 10$"] move to workspace $workspace10
 for_window [class = "Spotify"] move to workspace $workspace5

@@ -2,6 +2,7 @@ set -x PATH $HOME/bin $HOME/.cargo/bin $PATH /opt/android/sdk/platform-tools /op
 set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH /usr/local/lib/gtk-3.0/modules
 set -x ANDROID_HOME /opt/android/sdk/
 set -x TERM xterm-256color
+set -x TERMINAL xterm
 set -x VISUAL vim
 set -x EDITOR $VISUAL
 set -x HISTSIZE 32768
