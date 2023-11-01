@@ -35,7 +35,9 @@ exec --no-startup-id "setxkbmap -layout us,es -option 'grp:ctrl_alt_toggle'"
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id clipit -d
 exec --no-startup-id dropbox start
+exec --no-startup-id autorandr --change
 exec --no-startup-id nitrogen --restore
+exec --no-startup-id gromit-mpx &
 exec --no-startup-id i3-msg 'workspace $workspace1; exec xterm -title "workspace 1" -e tmux new -s "terminal"'
 exec --no-startup-id i3-msg 'workspace $workspace2; exec /opt/cisco/anyconnect/bin/vpnui'
 exec --no-startup-id i3-msg 'workspace $workspace3; exec firefox'
@@ -79,7 +81,7 @@ bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id "rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'FontAwesome 8'"
+bindsym $mod+d exec --no-startup-id "rofi -show drun -sidebar-mode"
 
 # change focus
 bindsym $mod+h focus left
