@@ -1,4 +1,7 @@
 [Desktop Entry]
-Type=Application
+Name=Gromit-MPX
+GenericName=On Screen Drawing Tool
 Exec=gromit-mpx
+Type=Application
+StartupNotify=false
 
