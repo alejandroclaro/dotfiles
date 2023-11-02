@@ -25,7 +25,6 @@ set $workspace10 "10: "
 assign [class="com.cisco.anyconnect.gui"] $workspace2
 assign [class="Firefox"] $workspace3
 assign [class = "Spotify"]  $workspace5
-assign [class="Code"] $workspace10
 
 exec --no-startup-id xsettingsd &
 exec --no-startup-id compton -b
@@ -61,6 +60,7 @@ for_window [window_role="About"] floating enable
 for_window [class = "XTerm$" title="^workspace 1$"] move to workspace $workspace1
 for_window [class="com.cisco.anyconnect.gui"] move to workspace $workspace2
 for_window [title="^email -"] move to workspace $workspace2
+for_window [title="^chat -"] move to workspace $workspace4
 for_window [title="^Microsoft Teams"] move to workspace $workspace4
 for_window [class = "XTerm$" title="^workspace 9$"] move to workspace $workspace9
 for_window [class = "XTerm$" title="^workspace 10$"] move to workspace $workspace10
@@ -217,22 +217,21 @@ bar {
   colors {
     background #282A36
     statusline #F8F8F2
-    separator  #44475A
+    separator #44475A
 
-    focused_workspace  #44475A #44475A #F8F8F2
-    active_workspace   #282A36 #44475A #F8F8F2
+    focused_workspace #44475A #44475A #F8F8F2
+    active_workspace #282A36 #44475A #F8F8F2
     inactive_workspace #282A36 #282A36 #BFBFBF
-    urgent_workspace   #FF5555 #FF5555 #F8F8F2
-    binding_mode       #FF5555 #FF5555 #F8F8F2
+    urgent_workspace #FF5555 #FF5555 #F8F8F2
+    binding_mode #FF5555 #FF5555 #F8F8F2
   }
 }
 
-# class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.focused #6272A4 #6272A4 #F8F8F2 #6272A4 #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A #44475A
+client.unfocused #282A36 #282A36 #BFBFBF #282A36 #282A36
+client.urgent #44475A #FF5555 #F8F8F2 #FF5555 #FF5555
+client.placeholder #282A36 #282A36 #F8F8F2 #282A36 #282A36
 
-client.background       #F8F8F2
+client.background #F8F8F2
 
