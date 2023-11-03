@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Nitrogen
+Comment=Desktop background setter for X Window
+Type=Application
+Exec=nitrogen --restore
+StartupNotify=false

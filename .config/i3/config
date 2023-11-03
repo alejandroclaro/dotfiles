@@ -21,51 +21,6 @@ set $workspace8 "8"
 set $workspace9 "9: "
 set $workspace10 "10: "
 
-# Startup programs
-assign [class="com.cisco.anyconnect.gui"] $workspace2
-assign [class="Firefox"] $workspace3
-assign [class = "Spotify"]  $workspace5
-
-exec --no-startup-id xsettingsd &
-exec --no-startup-id compton -b
-exec --no-startup-id caffeine
-exec --no-startup-id "setxkbmap -layout us,es -option 'grp:ctrl_alt_toggle'"
-exec --no-startup-id start-pulseaudio-x11
-exec --no-startup-id clipit -d
-exec --no-startup-id dropbox start
-exec --no-startup-id autorandr --change
-exec --no-startup-id nitrogen --restore
-exec --no-startup-id i3-msg 'workspace $workspace1; exec xterm -title "workspace 1" -e tmux new -s "terminal"'
-exec --no-startup-id i3-msg 'workspace $workspace2; exec /opt/cisco/anyconnect/bin/vpnui'
-exec --no-startup-id i3-msg 'workspace $workspace3; exec firefox'
-exec --no-startup-id i3-msg 'workspace $workspace4; exec google-chrome --app="https://teams.microsoft.com"'
-exec --no-startup-id i3-msg 'workspace $workspace5; exec spotify'
-exec --no-startup-id i3-msg 'workspace $workspace9; exec xterm -title "workspace 9" -e tmux new -s "coding 1"'
-exec --no-startup-id i3-msg 'workspace $workspace10; exec xterm -title "workspace 10" -e tmux new -s "coding 2"'
-
-# Floating mode application
-for_window [class="Gcalculator"] floating enable
-for_window [class="Gnome-calculator"] floating enable
-for_window [title="^Microsoft Teams"] floating disable, border none
-
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="Preferences"] floating enable
-for_window [window_type="dialog"] floating enable
-for_window [window_type="menu"] floating enable
-for_window [window_role="About"] floating enable
-
-
-for_window [class = "XTerm$" title="^workspace 1$"] move to workspace $workspace1
-for_window [class="com.cisco.anyconnect.gui"] move to workspace $workspace2
-for_window [title="^email -"] move to workspace $workspace2
-for_window [title="^chat -"] move to workspace $workspace4
-for_window [title="^Microsoft Teams"] move to workspace $workspace4
-for_window [class = "XTerm$" title="^workspace 9$"] move to workspace $workspace9
-for_window [class = "XTerm$" title="^workspace 10$"] move to workspace $workspace10
-for_window [class = "Spotify"] move to workspace $workspace5
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 default_floating_border normal
@@ -234,4 +189,41 @@ client.urgent #44475A #FF5555 #F8F8F2 #FF5555 #FF5555
 client.placeholder #282A36 #282A36 #F8F8F2 #282A36 #282A36
 
 client.background #F8F8F2
+
+# Floating mode application
+for_window [class="Gcalculator"] floating enable
+for_window [class="Gnome-calculator"] floating enable
+for_window [title="^Microsoft Teams"] floating disable, border none
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_role="About"] floating enable
+
+# Windows position
+assign [class="com.cisco.anyconnect.gui"] $workspace2
+assign [class="Firefox"] $workspace3
+assign [class = "Spotify"]  $workspace5
+
+for_window [class = "XTerm$" title="^workspace 1$"] move to workspace $workspace1
+for_window [class="com.cisco.anyconnect.gui"] move to workspace $workspace2
+for_window [title="^email -"] move to workspace $workspace2
+for_window [title="^chat -"] move to workspace $workspace4
+for_window [title="^Microsoft Teams"] move to workspace $workspace4
+for_window [class = "XTerm$" title="^workspace 9$"] move to workspace $workspace9
+for_window [class = "XTerm$" title="^workspace 10$"] move to workspace $workspace10
+for_window [class = "Spotify"] move to workspace $workspace5
+
+# Startup programs
+exec --no-startup-id dex -a -e i3 -s ~/.config/autostart/
+exec --no-startup-id i3-msg 'workspace $workspace1; exec xterm -title "workspace 1" -e tmux new -s "terminal"'
+exec --no-startup-id i3-msg 'workspace $workspace2; exec /opt/cisco/anyconnect/bin/vpnui'
+exec --no-startup-id i3-msg 'workspace $workspace3; exec firefox'
+exec --no-startup-id i3-msg 'workspace $workspace4; exec google-chrome --app="https://teams.microsoft.com"'
+exec --no-startup-id i3-msg 'workspace $workspace5; exec spotify'
+exec --no-startup-id i3-msg 'workspace $workspace9; exec xterm -title "workspace 9" -e tmux new -s "coding 1"'
+exec --no-startup-id i3-msg 'workspace $workspace10; exec xterm -title "workspace 10" -e tmux new -s "coding 2"'
 

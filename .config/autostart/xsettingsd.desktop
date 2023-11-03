@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=xsettingd
+GenericName=A lightweight xsettings daemon
+Exec=xsettingsd
+Type=Application
+Terminal=false
+StartupNotify=false

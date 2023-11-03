@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Compton
+GenericName=A compositor for X
+Exec=compton -b
+Terminal=false
+Type=Application
+StartupNotify=false

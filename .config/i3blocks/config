@@ -35,16 +35,17 @@ interval=5
 interval=10
 
 [cpu_usage]
-label=🖥 
+label= 
 DECIMALS=1
+COLOR_NORMAL=#FFFFFF
 interval=10
 
 [memory]
-label=  
+label= 
 interval=30
 
 [battery]
-label=🔋 
+label=  
 interval=30
 
 [rofi-calendar]

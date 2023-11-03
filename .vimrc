@@ -92,7 +92,6 @@ vnoremap <Leader>y "+ygv
 nnoremap <Leader>Y "+Y
 nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
-inoremap <C-v> <ESC>"+pa
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)

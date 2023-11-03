@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=ClipIt
+Comment=Clipboard Manager
+Icon=clipit-trayicon
+Exec=clipit -d
+Terminal=false
+Type=Application
