@@ -19,10 +19,6 @@ function ....
   cd ../../..
 end
 
-function sl
-  ls $argv
-end
-
 function la
   ls -A $argv
 end

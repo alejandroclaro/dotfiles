@@ -1,7 +1,3 @@
-" Theme configuration
-" Nerd HACK font shall be installed and configured in the terminal emulator.
-" https://github.com/ryanoasis/nerd-fonts/releases/
-
 " Basic configuration
 syntax on
 filetype off
@@ -28,7 +24,6 @@ set nrformats=
 set rnu
 set noro
 set laststatus=2
-set pastetoggle=<F2>
 
 if $TERM =~# '\v(tmux-256color)'
   set term=xterm-256color
@@ -54,13 +49,6 @@ inoremap <Right> <nop>
 inoremap <Up> <nop>
 inoremap <Down> <nop>
 
-nnoremap <M-j> :m .+1<CR>==
-nnoremap <M-k> :m .-2<CR>==
-inoremap <M-j> <Esc>:m .+1<CR>==gi
-inoremap <M-k> <Esc>:m .-2<CR>==gi
-vnoremap <M-j> :m '>+1<CR>gv=gv
-vnoremap <M-k> :m '<-2<CR>gv=gv
-
 for s:i in range(1, 4)
   execute 'nnoremap <Leader>' . s:i . ' :' . s:i . 'wincmd w<CR>'
 endfor
@@ -76,14 +64,27 @@ nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 nnoremap <leader><Tab> :FSHere<CR>
 
-nnoremap <C-@> gf
-nnoremap <C-#> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>gh :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gh :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gt :YcmCompleter GoTo<CR>
+nnoremap <leader>gd :YcmCompleter GetDoc<CR>
+nnoremap <leader>gi :YcmCompleter GoToAlternateFile<CR>
+nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <leader>gc :YcmCompleter GoToCallers<CR>
+nnoremap <leader>gs :YcmCompleter GoToSymbol<CR>
 
-nnoremap Q @q
-vnoremap Q :norm @q<CR>
+nmap s <Plug>(easymotion-s)
+xmap s <Plug>(easymotion-s)
+nmap S <Plug>(easymotion-bd-t)
+xmap S <Plug>(easymotion-bd-t)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
+
+nnoremap ]w :NextTrailingWhitespace<CR>
+nnoremap [w :PrevTrailingWhitespace<CR>
+
+nnoremap <silent> <leader>/ :set hlsearch!<CR>
 
 nnoremap Y y$
 nnoremap D d$
@@ -93,29 +94,17 @@ nnoremap <Leader>Y "+Y
 nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-nnoremap <silent> <leader>/ :set hlsearch!<CR>
+nnoremap <M-j> :m .+1<CR>==
+nnoremap <M-k> :m .-2<CR>==
+inoremap <M-j> <Esc>:m .+1<CR>==gi
+inoremap <M-k> <Esc>:m .-2<CR>==gi
+vnoremap <M-j> :m '>+1<CR>gv=gv
+vnoremap <M-k> :m '<-2<CR>gv=gv
 
-nmap <leader>f <Plug>(easymotion-f)
-xmap <leader>f <Plug>(easymotion-f)
-nmap <leader>F <Plug>(easymotion-F)
-xmap <leader>F <Plug>(easymotion-F)
-nmap <leader>t <Plug>(easymotion-t)
-xmap <leader>t <Plug>(easymotion-t)
-nmap <leader>T <Plug>(easymotion-T)
-xmap <leader>T <Plug>(easymotion-T)
-
-nnoremap ]w :NextTrailingWhitespace<CR>
-nnoremap [w :PrevTrailingWhitespace<CR>
-
-noremap <silent> <C-t> :FZF<CR>
-noremap <silent> <leader>o :GitFiles<CR>
+noremap <silent> <C-t> :Files<CR>
 noremap <silent> <leader>O :Files<CR>
+noremap <silent> <leader>o :GitFiles<CR>
 noremap <silent> <leader>b :Buffers<CR>
-
-nnoremap <leader>W :StripWhitespace<CR>
 
 if has('python')
   noremap <C-f> :pyf /usr/share/clang/clang-format-15/clang-format.py<CR>
@@ -125,59 +114,86 @@ elseif has('python3')
   inoremap <C-f> <C-o>:py3f /usr/share/clang/clang-format-15/clang-format.py<CR>
 endif
 
-nnoremap <leader>u :UndotreeToggle<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>N :NERDTreeFind<CR>
-
 nnoremap <leader>D <Plug>(YCMHover)
-nnoremap <F12> :YcmDiags<CR>
+nnoremap <leader>N :NERDTreeFind<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>W :StripWhitespace<CR>
+
+nnoremap Q @q
+vnoremap Q :norm @q<CR>
+
+set pastetoggle=<F2>
+nnoremap <F3> :YcmDiags<CR>
+nnoremap <F4> :YcmCompleter FixIt<CR>
+nnoremap <F5> (':YcmCompleter RefactorRename ' . input('refactor \"'.expand('<cword>').'\" to:') '<CR>')
+nnoremap <F11> <Plug>(grammarous-open-info-window)
+nnoremap <F12> :GrammarousCheck<CR>
 
 " Vundle plugin manager configuration
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'airblade/vim-gitgutter'
+
+" Plugin manager
+Plugin 'VundleVim/Vundle.vim'
+
+" AI
 Plugin 'alejandroclaro/vim-ai-assistant'
-Plugin 'dracula/vim', { 'name': 'dracula' }
-Plugin 'bfrg/vim-cpp-modern'
-Plugin 'cdelledonne/vim-cmake'
+
+" Navigation
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'delimitMate.vim'
-Plugin 'derekwyatt/vim-fswitch'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'fatih/vim-go'
-Plugin 'godlygeek/tabular'
-Plugin 'haya14busa/incsearch.vim'
-Plugin 'JuliaLang/julia-vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
-Plugin 'liuchengxu/vim-which-key'
-Plugin 'luochen1990/rainbow'
+Plugin 'scrooloose/nerdtree'
+
+" Edition
+Plugin 'godlygeek/tabular'
 Plugin 'mbbill/undotree'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'powerline/powerline-fonts'
 Plugin 'rhysd/vim-grammarous'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+
+" Software development
+Plugin 'cdelledonne/vim-cmake'
+Plugin 'delimitMate.vim'
+Plugin 'derekwyatt/vim-fswitch'
 Plugin 'valloric/youcompleteme'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'wfxr/minimap.vim'
+
+" Git
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
+" Helpers
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'liuchengxu/vim-which-key'
+Plugin 'tpope/vim-obsession'
+
+" Syntax
+Plugin 'luochen1990/rainbow'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" Look and feel
+Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'powerline/powerline-fonts'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'wfxr/minimap.vim'
+
+" Must be last
 Plugin 'ryanoasis/vim-devicons'
+
 call vundle#end()
 
 " Color scheme
+" Nerd HACK font shall be installed and configured in the terminal emulator.
+" https://github.com/ryanoasis/nerd-fonts/releases/
 set guifont=Hack\ Nerd\ Font
 colorscheme dracula
 
@@ -242,6 +258,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:minimap_auto_start = 1
 let g:minimap_git_colors = 1
 
+let g:minimap_block_filetypes = [ 'fugitive', 'nerdtree', 'tagbar', 'fzf', 'help', 'qf' ]
+let g:minimap_close_filetypes = [ 'startify', 'netrw', 'vim-plug', 'fugitive', 'nerdtree', 'help', 'qf' ]
+
 " rainbow parentheses and highlight enhancement
 let g:rainbow_active = 1
 let g:rainbow_conf = { 'ctermfgs': [ '33', '226', '112', '165', '231' ] }
@@ -256,17 +275,20 @@ let g:better_whitespace_enabled = 1
 let g:strip_whitespace_on_save = 1
 
 " YCM plugin configuration
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_max_diagnostics_to_display = 30
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_auto_trigger = 1
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_echo_current_diagnostic = 'virtual-text'
+let g:ycm_update_diagnostics_in_insert_mode = 0
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_max_diagnostics_to_display = 30
+
 let g:ycm_clangd_args=['--header-insertion=never']
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 set path+=/usr/include/c++/9
 
 " Easy motion configuration
+let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
-let g:EasyMotion_do_mapping = 1
 let g:EasyMotion_use_smartsign_us = 1
 
 " Grammarous configuration
@@ -285,10 +307,16 @@ if (exists('+colorcolumn'))
   highlight ColorColumn ctermbg=236
 endif
 
-" fix quicklist window position
+" Fix quicklist window position
 augroup DragQuickfixWindowDown
-    autocmd!
-    autocmd FileType qf wincmd J
+  autocmd!
+  autocmd FileType qf wincmd J
+augroup end
+
+" Fix help window position
+augroup DragHelpWindowRigth
+  autocmd!
+  autocmd FileType help wincmd L
 augroup end
 
 " Show relative or absolute line number
