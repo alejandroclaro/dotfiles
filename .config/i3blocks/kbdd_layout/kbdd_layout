@@ -33,6 +33,7 @@ while [[ -z "$N" ]]; do
         /ru/gentoo/KbddService ru.gentoo.kbdd.getCurrentLayout 2>/dev/null |\
         sed -un 's/^.*uint32 //p' )
 done
+
 echo $( dbus-send --print-reply=literal --dest=ru.gentoo.KbddService \
 	/ru/gentoo/KbddService ru.gentoo.kbdd.getLayoutName uint32:$N )
 

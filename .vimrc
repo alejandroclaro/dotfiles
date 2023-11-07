@@ -60,6 +60,7 @@ map <C-l> <C-w>l
 
 nnoremap <leader>E :enew<CR>
 nnoremap <leader>bd :Bclose<CR>
+nnoremap <leader>bo :Bonly<CR>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 nnoremap <leader><Tab> :FSHere<CR>
@@ -126,7 +127,7 @@ vnoremap Q :norm @q<CR>
 set pastetoggle=<F2>
 nnoremap <F3> :YcmDiags<CR>
 nnoremap <F4> :YcmCompleter FixIt<CR>
-nnoremap <F5> (':YcmCompleter RefactorRename ' . input('refactor \"'.expand('<cword>').'\" to:') '<CR>')
+nnoremap <F5> :YcmCompleter RefactorRename
 nnoremap <F11> <Plug>(grammarous-open-info-window)
 nnoremap <F12> :GrammarousCheck<CR>
 
