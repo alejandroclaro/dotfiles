@@ -256,7 +256,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Minimap configuration
-let g:minimap_auto_start = 1
+let g:minimap_auto_start = 0
 let g:minimap_git_colors = 1
 
 let g:minimap_block_filetypes = [ 'fugitive', 'nerdtree', 'tagbar', 'fzf', 'help', 'qf' ]
@@ -284,8 +284,7 @@ let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_max_diagnostics_to_display = 30
 
 let g:ycm_clangd_args=['--header-insertion=never']
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-set path+=/usr/include/c++/9
+let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
 
 " Easy motion configuration
 let g:EasyMotion_do_mapping = 0
