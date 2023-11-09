@@ -1,0 +1,9 @@
+text/html; $BROWSER %s
+text/html; w3m -I %{charset} -T text/html -dump; copiousoutput;
+text/calendar; dump-ical %s; copiousoutput;
+image/*; sxiv -a -b %s &
+video/*; setsid mpv --quiet %s &
+application/pdf; zathura %s &
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice %s & disown
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; libreoffice %s & disown
+

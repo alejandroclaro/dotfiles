@@ -44,7 +44,7 @@ function md
 end
 
 function rd
-  rmdir -r $argv
+  rm -r $argv
 end
 
 eval (thefuck --alias | tr '\n' ';')

@@ -1,0 +1,106 @@
+# Theme
+source ~/.config/mutt/dracula.muttrc
+
+# Email Folder Setup
+set folder = "~/.mail/work"
+set mbox_type = Maildir
+set spoolfile = +Inbox
+set record = +Sent
+set postponed = +Drafts
+set header_cache = ~/.cache/mutt
+#mailboxes +Sent +Drafts +Junk +Trash
+
+#  NotMuch Settings
+set nm_default_url = "notmuch://$HOME/.mail/work"
+set nm_query_type = "threads"
+virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
+set virtual_spoolfile = yes
+bind index \\ vfolder-from-query
+
+#  Sending Emails
+set sendmail = "~/.bin/emails/send-mail work"
+
+#  Index View Settings
+set sort = threads
+set sort_aux = reverse-last-date-received
+set index_format='%4C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]> %-15.15L (%?l?%4l&%4c?) %s'
+
+# Vim like keybindings
+bind index G last-entry
+bind index g noop
+bind index gg first-entry
+bind index r reply
+bind index R group-reply
+bind index c collapse-thread
+bind index C collapse-all
+bind index N search-opposite
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+macro index o "<shell-escape>check-emails inbox<enter>" "Check Emails"
+macro index O "<shell-escape>check-emails<enter>" "Check Emails"
+
+#  Sidebar Settings
+set sidebar_divider_char = '│'
+set sidebar_delim_chars = "/"
+set sidebar_short_path
+set sidebar_folder_indent
+set sidebar_visible = yes
+set sidebar_width = 24
+set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
+
+bind index,pager \Cj sidebar-next
+bind index,pager \Ck sidebar-prev
+bind index,pager \Co sidebar-open
+bind index,pager \Cb sidebar-toggle-visible
+
+#  Composing Settings
+set editor = "vim +':set textwidth=0'"
+set edit_headers=yes
+set autoedit=yes
+set use_from = yes
+set forward_format = "Fwd: %s"
+set forward_quote = yes
+set include = yes
+set indent_string = ''
+set attribution="\n________________________________________\nFrom: %F <%a>\nSent: %{%d %B %Y %R}\nTo: %r\nCc: %R\nSubject: %s\n"
+my_hdr Markdown: false
+
+# Viewing settings
+set markers=no
+set wrap=78
+set pager_stop=yes
+set mailcap_path = "~/.config/mutt/mailcap"
+
+auto_view text/html
+auto_view application/pgp-encrypted
+auto_view text/calendar
+
+alternative_order text/plain text/calendar text/enriched text/html
+
+macro pager ,@aoh= "<enter-command>unalternative_order *; alternative_order text/calendar text/html text/plain text/enriched; macro pager A ,@aot= 'toggle alternative order'<enter><exit><display-message>"
+macro pager ,@aot= "<enter-command>unalternative_order *; alternative_order text/plain text/calendar text/enriched text/html; macro pager A ,@aoh= 'toggle alternative order'<enter><exit><display-message>"
+macro pager A ,@aoh= "toggle alternative order"
+macro pager U "<enter-command>set pipe_decode = yes<enter><pipe-message>urlscan  -dc -r 'linkhandler {}'<enter><enter-command>set pipe_decode = no<enter>" "view URLs"
+
+bind pager r reply
+bind pager R group-reply
+bind pager g noop
+bind pager G bottom
+bind pager gg top
+bind pager j next-line
+bind pager k previous-line
+
+# Compose settings
+macro compose Y "<first-entry>\
+<pipe-entry>convert-multipart<enter>\
+<enter-command>source /tmp/neomutt-commands<enter>
+
+# Contacts
+set query_command= "abook --mutt-query '%s'"
+macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+
+# Misc Settings
+set wait_key = no
+#set abort_key = "<Esc>"
+set realname = "Alejandro Claro"
+

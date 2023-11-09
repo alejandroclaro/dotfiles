@@ -16,6 +16,7 @@
 - dex: A DesktopEntry executor.
 - dunst: A lightweight notification daemon.
 - flameshot: A screenshots tool
+- gpick: A screen color picker.
 - gromit-mpx: An on-screen annotation tool (draw directly on the screen).
 - i3: The best windows manager.
 - i3blocks: An i3 status bar.
@@ -42,17 +43,27 @@
 - fzf: An awesome fuzzy logic finder.
 - ImageMagick: A tool for displaying, creating, converting, modifying, and editing raster images.
 - nnn: A nice files manager.
+- mdless: A better less for markdown files.
 - pdftoppm(poppler): A tool for pdf thumbnails.
 - scrot: A terminal screen capturing application.
 - the fuck: The faster way to correct errors in previous terminal commands.
 - tmux-tpm: A tmux plugins manager.
 - tmux: A terminal multiplexer.
 - w3m: A terminal web browser.
+- xclip: A terminal interface to the clipboard.
 - xterm: A good enough terminal emulator.
 
 ## Text edition
 
 - vim-gtk3: A nice text editor (with support to python, clipboard, etc).
+
+## e-mails
+
+- abook: An address book for (neo)mutt.
+- davmail: Integration with Exchange email servers.
+- mbsync: A mailboxes syncronizer.
+- neomutt: email client.
+- notmuch: A really fast mail indexer.
 
 ## Software development
 

@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+DATEFTM="${DATEFTM:-+%a %d %b %Y}"
+SHORTFMT="${SHORTFMT:-+%d/%m/%Y}"
+
+echo $LABEL$(date "$DATEFTM")
+echo $LABEL$(date "$SHORTFMT")

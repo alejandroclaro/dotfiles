@@ -129,8 +129,10 @@ bindcode $mod+69 exec pulsemixer --change-volume +5 && pkill -RTMIN+10 i3blocks
 bindcode $mod+95 exec xbacklight -inc 1
 bindcode $mod+96 exec xbacklight -dec 1
 
-# Screenshoot and drawing
+# Screenshoot, drawning, and colors
 bindsym $mod+Shift+s exec --no-startup-id "flameshot gui"
+bindsym $mod+Shift+p exec --no-startup-id "gpick -p -c"
+bindsym $mod+$alt+z exec --no-startup-id "peek"
 
 # Focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -191,7 +193,8 @@ client.placeholder #282A36 #282A36 #F8F8F2 #282A36 #282A36
 client.background #F8F8F2
 
 # Floating mode application
-for_window [class="Gcalculator"] floating enable
+for_window [class="Gcalculator"] floating enable, border normal
+for_window [class="Gpick"] floating enable, border normal
 for_window [class="Gnome-calculator"] floating enable
 for_window [title="^Microsoft Teams"] floating disable, border none
 

@@ -1,0 +1,16 @@
+[database]
+path=.mail/work
+
+[user]
+name=Alejandro Claro
+primary_email=alejandro.claro@smartmatic.com
+
+[new]
+tags=unread;inbox;
+ignore=
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true

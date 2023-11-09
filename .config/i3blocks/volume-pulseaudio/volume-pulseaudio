@@ -85,7 +85,6 @@ fi
 
 CAPABILITY=$(amixer -D $MIXER get $SCONTROL | sed -n "s/  Capabilities:.*cvolume.*/Capture/p")
 
-
 function move_sinks_to_new_default {
     DEFAULT_SINK=$1
     pacmd list-sink-inputs | grep index: | grep -o '[0-9]\+' | while read SINK
