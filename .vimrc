@@ -107,14 +107,6 @@ noremap <silent> <leader>O :Files<CR>
 noremap <silent> <leader>o :GitFiles<CR>
 noremap <silent> <leader>b :Buffers<CR>
 
-if has('python')
-  noremap <C-f> :pyf /usr/share/clang/clang-format-15/clang-format.py<CR>
-  inoremap <C-f> <C-o>:pyf /usr/share/clang/clang-format-15/clang-format.py<CR>
-elseif has('python3')
-  noremap <C-f> :py3f /usr/share/clang/clang-format-15/clang-format.py<CR>
-  inoremap <C-f> <C-o>:py3f /usr/share/clang/clang-format-15/clang-format.py<CR>
-endif
-
 nnoremap <leader>D <Plug>(YCMHover)
 nnoremap <leader>N :NERDTreeFind<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
@@ -123,6 +115,9 @@ nnoremap <leader>W :StripWhitespace<CR>
 
 nnoremap Q @q
 vnoremap Q :norm @q<CR>
+
+noremap <C-f> :FormatCode<CR>
+inoremap <C-f> :FormatCode<CR>
 
 set pastetoggle=<F2>
 nnoremap <F3> :YcmDiags<CR>

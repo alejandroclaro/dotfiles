@@ -35,7 +35,7 @@ bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id "rofi -show drun -sidebar-mode"
+bindsym $mod+d exec --no-startup-id rofi -show drun -sidebar-mode
 
 # change focus
 bindsym $mod+h focus left
@@ -130,9 +130,9 @@ bindcode $mod+95 exec xbacklight -inc 1
 bindcode $mod+96 exec xbacklight -dec 1
 
 # Screenshoot, drawning, and colors
-bindsym $mod+Shift+s exec --no-startup-id "flameshot gui"
-bindsym $mod+Shift+p exec --no-startup-id "gpick -p -c"
-bindsym $mod+$alt+z exec --no-startup-id "peek"
+bindsym $mod+Shift+s --release exec --no-startup-id flameshot gui
+bindsym $mod+Shift+z --release exec --no-startup-id gpick
+bindsym $mod+$alt+z --release exec peek
 
 # Focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -221,6 +221,7 @@ for_window [class = "XTerm$" title="^workspace 10$"] move to workspace $workspac
 for_window [class = "Spotify"] move to workspace $workspace5
 
 # Startup programs
+exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id dex -a -e i3 -s ~/.config/autostart/
 exec --no-startup-id i3-msg 'workspace $workspace1; exec xterm -title "workspace 1" -e tmux new -s "terminal"'
 exec --no-startup-id i3-msg 'workspace $workspace2; exec /opt/cisco/anyconnect/bin/vpnui'

@@ -3,7 +3,7 @@
 ! ------------------------------------------------------------------------------
 
 *.foreground: #F8F8F2
-*.background: #282A36
+*.background: #303030
 *.color0:     #000000
 *.color8:     #4D4D4D
 *.color1:     #FF5555
@@ -52,7 +52,7 @@ xterm*faceName:   Hack Nerd Font
 XTerm*faceSize:   12
 
 Xterm*foreground: #F8F8F2
-Xterm*background: #282A36
+Xterm*background: #303030
 Xterm*color0:     #000000
 Xterm*color8:     #4D4D4D
 Xterm*color1:     #FF5555
