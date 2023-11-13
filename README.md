@@ -38,7 +38,7 @@
 - delta: A better diff.
 - fd: A better find.
 - ffmpegthumbnailer: A tool for creating video thumbnails.
-- fish shell: The best command line shell
+- fish shell: The best command line shell.
 - fisher: A fish shell plugins manager.
 - fzf: An awesome fuzzy logic finder.
 - ImageMagick: A tool for displaying, creating, converting, modifying, and editing raster images.
@@ -82,3 +82,4 @@
 - yarn: A NodeJS package manager.
 - python: The Python language interpreters.
 - pip: A Python package manager.
+- Pygments: A Python syntax highlighter (GDB dashboard).

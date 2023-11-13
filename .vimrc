@@ -3,6 +3,9 @@ syntax on
 filetype off
 filetype plugin indent on
 
+set backupdir=$HOME/.vim/
+set undodir=$HOME/.vim/
+
 set shell=/bin/bash
 set encoding=utf-8
 set t_Co=256
@@ -70,17 +73,17 @@ nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gh :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gt :YcmCompleter GoTo<CR>
 nnoremap <leader>gd :YcmCompleter GetDoc<CR>
-nnoremap <leader>gi :YcmCompleter GoToAlternateFile<CR>
+nnoremap <leader>ga :YcmCompleter GoToAlternateFile<CR>
 nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>gc :YcmCompleter GoToCallers<CR>
 nnoremap <leader>gs :YcmCompleter GoToSymbol<CR>
 
-nmap s <Plug>(easymotion-s)
-xmap s <Plug>(easymotion-s)
-nmap S <Plug>(easymotion-bd-t)
-xmap S <Plug>(easymotion-bd-t)
-map <leader>j <Plug>(easymotion-j)
-map <leader>k <Plug>(easymotion-k)
+nnoremap s <Plug>(easymotion-s)
+xnoremap s <Plug>(easymotion-s)
+nnoremap S <Plug>(easymotion-bd-t)
+xnoremap S <Plug>(easymotion-bd-t)
+noremap <leader>j <Plug>(easymotion-j)
+noremap <leader>k <Plug>(easymotion-k)
 
 nnoremap ]w :NextTrailingWhitespace<CR>
 nnoremap [w :PrevTrailingWhitespace<CR>
@@ -116,8 +119,9 @@ nnoremap <leader>W :StripWhitespace<CR>
 nnoremap Q @q
 vnoremap Q :norm @q<CR>
 
-noremap <C-f> :FormatCode<CR>
-inoremap <C-f> :FormatCode<CR>
+nnoremap <C-f> :FormatCode<CR>
+vnoremap <C-f> :FormatCode<CR>gv=gv
+inoremap <C-f> <Esc>:FormatCode<CR>==gi
 
 set pastetoggle=<F2>
 nnoremap <F3> :YcmDiags<CR>
@@ -266,9 +270,16 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 2
 
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=237
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=238
+
 " Better whitespace configuration
 let g:better_whitespace_enabled = 1
 let g:strip_whitespace_on_save = 1
+let g:better_whitespace_filetypes_blacklist = ['diff']
+
+autocmd FileType fugitive DisableWhitespace
 
 " YCM plugin configuration
 let g:ycm_auto_trigger = 1
@@ -329,4 +340,3 @@ au FocusLost * call ToggleNumbersOn()
 au FocusGained * call ToggleRelativeOn()
 au InsertEnter * call ToggleNumbersOn()
 au InsertLeave * call ToggleRelativeOn()
-
