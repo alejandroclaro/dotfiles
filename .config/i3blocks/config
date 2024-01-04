@@ -53,17 +53,17 @@ interval=3600
 
 [time]
 label=PTY 
-command=TZ=":America/Panama" date '+%r'
+command=TZ=":America/Panama" date '+%I:%M'
 interval=60
 
 [time]
 label=MIA 
-command=TZ=":America/New_York" date '+%r'
+command=TZ=":America/New_York" date '+%I:%M'
 interval=60
 
 [time]
 label=TPE 
-command=TZ=":Asia/Taipei" date '+%r'
+command=TZ=":Asia/Taipei" date '+%I:%M'
 interval=60
 
 [time]

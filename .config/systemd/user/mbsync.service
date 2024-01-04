@@ -3,5 +3,4 @@ Description=Mail synchronization service
 
 [Service]
 Type=oneshot
-ExecStart=mbsync -Va
-ExecStartPost=notmuch new
+ExecStart=%h/.bin/sync-mailbox.sh

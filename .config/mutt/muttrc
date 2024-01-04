@@ -8,22 +8,24 @@ set spoolfile = +Inbox
 set record = +Sent
 set postponed = +Drafts
 set header_cache = ~/.cache/mutt
-#mailboxes +Sent +Drafts +Junk +Trash
 
 #  NotMuch Settings
-set nm_default_url = "notmuch://$HOME/.mail/work"
+set nm_default_uri = "notmuch://$HOME/.mail/work"
 set nm_query_type = "threads"
-virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
 set virtual_spoolfile = yes
-bind index \\ vfolder-from-query
+
+virtual-mailboxes "Inbox"   "notmuch://?query=tag:inbox"
+virtual-mailboxes "Archive" "notmuch://?query=tag:archive"
+virtual-mailboxes "Sent"    "notmuch://?query=tag:sent"
+virtual-mailboxes "Drafts"  "notmuch://?query=tag:draft"
 
 #  Sending Emails
-set sendmail = "~/.bin/emails/send-mail work"
+set sendmail = "~/.bin/send-mail"
 
 #  Index View Settings
 set sort = threads
 set sort_aux = reverse-last-date-received
-set index_format='%4C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]> %-15.15L (%?l?%4l&%4c?) %s'
+set index_format = '%4C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%a %d]>&%[%b %d]>&%[%m/%y ]> %-15.15L (%?l?%4l&%4c?) %s'
 
 # Vim like keybindings
 bind index G last-entry
@@ -36,8 +38,7 @@ bind index C collapse-all
 bind index N search-opposite
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
-macro index o "<shell-escape>check-emails inbox<enter>" "Check Emails"
-macro index O "<shell-escape>check-emails<enter>" "Check Emails"
+macro index o "<shell-escape>sync-mailbox.sh<enter>" "Check Emails"
 
 #  Sidebar Settings
 set sidebar_divider_char = '│'

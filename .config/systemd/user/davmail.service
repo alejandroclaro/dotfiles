@@ -1,13 +1,11 @@
 [Unit]
 Description=DavMail gateway service
-After=syslog.target
-After=network.target
 
 [Service]
 Type=simple
 RemainAfterExit=no
-ExecStart=davmail
+ExecStart=davmail ${HOME}/.davmail.properties
 ExecStop=killall davmail
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

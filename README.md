@@ -41,9 +41,10 @@
 - fish shell: The best command line shell.
 - fisher: A fish shell plugins manager.
 - fzf: An awesome fuzzy logic finder.
+- glow: very nice HTML terminal renderer.
 - ImageMagick: A tool for displaying, creating, converting, modifying, and editing raster images.
-- nnn: A nice files manager.
 - mdless: A better less for markdown files.
+- nnn: A nice files manager.
 - pdftoppm(poppler): A tool for pdf thumbnails.
 - scrot: A terminal screen capturing application.
 - the fuck: The faster way to correct errors in previous terminal commands.

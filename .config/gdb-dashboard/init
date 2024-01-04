@@ -1,0 +1,7 @@
+add-auto-load-safe-path ~/Code/
+
+dashboard -layout source breakpoints !threads !stack variables !expressions
+dashboard -style syntax_highlighting 'dracula'
+
+dashboard -enabled off
+

@@ -172,13 +172,13 @@ bar {
   status_command i3blocks
   tray_output none
   colors {
-    background #282A36
+    background #303030
     statusline #F8F8F2
     separator #44475A
 
     focused_workspace #44475A #44475A #F8F8F2
-    active_workspace #282A36 #44475A #F8F8F2
-    inactive_workspace #282A36 #282A36 #BFBFBF
+    active_workspace #303030 #44475A #F8F8F2
+    inactive_workspace #303030 #303030 #BFBFBF
     urgent_workspace #FF5555 #FF5555 #F8F8F2
     binding_mode #FF5555 #FF5555 #F8F8F2
   }
@@ -186,9 +186,9 @@ bar {
 
 client.focused #6272A4 #6272A4 #F8F8F2 #6272A4 #6272A4
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A #44475A
-client.unfocused #282A36 #282A36 #BFBFBF #282A36 #282A36
+client.unfocused #303030 #303030 #BFBFBF #303030 #303030
 client.urgent #44475A #FF5555 #F8F8F2 #FF5555 #FF5555
-client.placeholder #282A36 #282A36 #F8F8F2 #282A36 #282A36
+client.placeholder #303030 #303030 #F8F8F2 #303030 #303030
 
 client.background #F8F8F2
 
@@ -211,23 +211,23 @@ assign [class="com.cisco.anyconnect.gui"] $workspace2
 assign [class="Firefox"] $workspace3
 assign [class = "Spotify"]  $workspace5
 
-for_window [class = "XTerm$" title="^workspace 1$"] move to workspace $workspace1
+for_window [class = "Alacritty$" title="^workspace 1$"] move to workspace $workspace1
 for_window [class="com.cisco.anyconnect.gui"] move to workspace $workspace2
 for_window [title="^email -"] move to workspace $workspace2
 for_window [title="^chat -"] move to workspace $workspace4
 for_window [title="^Microsoft Teams"] move to workspace $workspace4
-for_window [class = "XTerm$" title="^workspace 9$"] move to workspace $workspace9
-for_window [class = "XTerm$" title="^workspace 10$"] move to workspace $workspace10
+for_window [class = "Alacritty$" title="^workspace 9$"] move to workspace $workspace9
+for_window [class = "Alacritty$" title="^workspace 10$"] move to workspace $workspace10
 for_window [class = "Spotify"] move to workspace $workspace5
 
 # Startup programs
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id dex -a -e i3 -s ~/.config/autostart/
-exec --no-startup-id i3-msg 'workspace $workspace1; exec xterm -title "workspace 1" -e tmux new -s "terminal"'
+exec --no-startup-id i3-msg 'workspace $workspace1; exec alacritty -T "workspace 1" -e tmux new -s "terminal"'
 exec --no-startup-id i3-msg 'workspace $workspace2; exec /opt/cisco/anyconnect/bin/vpnui'
 exec --no-startup-id i3-msg 'workspace $workspace3; exec firefox'
 exec --no-startup-id i3-msg 'workspace $workspace4; exec google-chrome --app="https://teams.microsoft.com"'
 exec --no-startup-id i3-msg 'workspace $workspace5; exec spotify'
-exec --no-startup-id i3-msg 'workspace $workspace9; exec xterm -title "workspace 9" -e tmux new -s "coding 1"'
-exec --no-startup-id i3-msg 'workspace $workspace10; exec xterm -title "workspace 10" -e tmux new -s "coding 2"'
+exec --no-startup-id i3-msg 'workspace $workspace9; exec alacritty -T "workspace 9" -e tmux new -s "coding 1"'
+exec --no-startup-id i3-msg 'workspace $workspace10; exec alacritty -T "workspace 10" -e tmux new -s "coding 2"'
 

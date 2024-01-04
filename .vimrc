@@ -22,15 +22,23 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set wildmenu
+set wildmode=longest:full,full
 set nowrap
 set nrformats=
 set rnu
 set noro
 set laststatus=2
 
+set completeopt-=preview
+set completeopt+=popup
+set completepopup=height:15,width:60,border:on,highlight:PMenuSbar
+set previewpopup=height:10,width:60,border:on,highlight:PMenuSbar
+
 if $TERM =~# '\v(tmux-256color)'
   set term=xterm-256color
 endif
+
+set fillchars+=vert:│
 
 " Leader key
 let mapleader = "\<Space>"
@@ -66,7 +74,7 @@ nnoremap <leader>bd :Bclose<CR>
 nnoremap <leader>bo :Bonly<CR>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
-nnoremap <leader><Tab> :FSHere<CR>
+nnoremap <leader><Tab> :YcmCompleter GoToAlternateFile<CR>
 
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
@@ -148,6 +156,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
 
 " Edition
+Plugin 'echuraev/translate-shell.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'mbbill/undotree'
 Plugin 'ntpeters/vim-better-whitespace'
@@ -160,7 +169,6 @@ Plugin 'tpope/vim-unimpaired'
 " Software development
 Plugin 'cdelledonne/vim-cmake'
 Plugin 'delimitMate.vim'
-Plugin 'derekwyatt/vim-fswitch'
 Plugin 'valloric/youcompleteme'
 
 " Git
@@ -286,6 +294,7 @@ let g:ycm_auto_trigger = 1
 let g:ycm_show_diagnostics_ui = 1
 let g:ycm_echo_current_diagnostic = 'virtual-text'
 let g:ycm_update_diagnostics_in_insert_mode = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_max_diagnostics_to_display = 30
 
@@ -300,6 +309,20 @@ let g:EasyMotion_use_smartsign_us = 1
 " Grammarous configuration
 let g:grammarous#jar_url = 'https://www.languagetool.org/download/LanguageTool-5.9.zip'
 let g:grammarous#default_comments_only_filetypes = { '*' : 1, 'help' : 0, 'markdown' : 0, }
+
+let g:grammarous#hooks = {}
+function! g:grammarous#hooks.on_check(errs) abort
+    nmap <buffer><C-n> <Plug>(grammarous-move-to-next-error)
+    nmap <buffer><C-p> <Plug>(grammarous-move-to-previous-error)
+endfunction
+
+function! g:grammarous#hooks.on_reset(errs) abort
+    nunmap <buffer><C-n>
+    nunmap <buffer><C-p>
+endfunction
+
+" Translate shell configuration
+let g:trans_bin = "~/.vim"
 
 " GDB
 let g:termdebug_popup = 0
