@@ -2,8 +2,6 @@ function _G.build_cmp_mapping(cmp)
   return {
     ['<C-n>']     = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
     ['<C-p>']     = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-    ['<C-b>']     = cmp.mapping.scroll_docs(-4),
-    ['<C-f>']     = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>']     = cmp.mapping.abort(),
     ['<CR>']      = cmp.mapping.confirm({ select = true }),
@@ -14,14 +12,13 @@ end
 
 local function configure()
   local cmp           = require('cmp')
-  local sources       = { { name = "nvim_lsp" }, { name = "luasnip" }, { name = "path" } }
+  local sources       = { { name = "nvim_lsp" }, { name = "luasnip" }, { name = "path" }, name = { 'conjure' } }
   local configuration = {}
 
-
-  configuration.completion = { completeopt = 'menu,menuone,noinsert' }
-  configuration.snippet    = { expand = function(args) require('luasnip').lsp_expand(args.body) end }
-  configuration.sources    = cmp.config.sources(sources, { { name = 'buffer' } })
-  configuration.mapping    = cmp.mapping.preset.insert(_G.build_cmp_mapping(cmp))
+  configuration.confirmation = { completeopt = 'menu,menuone,noinsert,noselect' }
+  configuration.snippet      = { expand = function(args) require('luasnip').lsp_expand(args.body) end }
+  configuration.sources      = cmp.config.sources(sources, { { name = 'buffer' } })
+  configuration.mapping      = cmp.mapping.preset.insert(_G.build_cmp_mapping(cmp))
 
   require('cmp.config.default')()
 

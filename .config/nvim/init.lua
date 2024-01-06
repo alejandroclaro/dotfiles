@@ -1,5 +1,5 @@
-require('plugins')
-
 require('settings.options')
-require('settings.keymaps')
+require('plugins')
+require('settings.commands')
 require('settings.autocommands')
+require('settings.keymaps')

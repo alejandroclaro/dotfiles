@@ -1,4 +1,4 @@
-function _G.on_add_buffer()
+function _G.on_bufferline_add_buffer()
   vim.schedule(function() pcall(nvim_bufferline) end)
 end
 
@@ -14,10 +14,11 @@ local function configure()
     offsets = { neotree_offset }
   }
 
+  vim.o.termguicolors = true
   require('bufferline').setup({ options = options })
 
   -- Fix bufferline when restoring a session
-  vim.api.nvim_create_autocmd('BufAdd', { callback = _G.on_add_buffer })
+  vim.api.nvim_create_autocmd('BufAdd', { callback = _G.on_bufferline_add_buffer })
 end
 
 local function setup(use)

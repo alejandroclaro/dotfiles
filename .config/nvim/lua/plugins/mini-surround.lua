@@ -1,23 +1,26 @@
 local function configure()
+  local has_wk, wk    = pcall(require, 'which-key')
   local configuration = {}
 
   configuration.mappings = {
-    add            = 'gsa', -- Add surrounding in Normal and Visual modes
-    delete         = 'gsd', -- Delete surrounding
-    find           = 'gsf', -- Find surrounding (to the right)
-    find_left      = 'gsF', -- Find surrounding (to the left)
-    highlight      = 'gsh', -- Highlight surrounding
-    replace        = 'gsr', -- Replace surrounding
-    update_n_lines = 'Gsn', -- Update `n_lines`
-    suffix_last    = 'l',   -- Suffix to search with "prev" method
-    suffix_next    = 'n',   -- Suffix to search with "next" method
+    add            = 'gSa', -- Add surrounding in Normal and Visual modes
+    delete         = 'gSd', -- Delete surrounding
+    find           = 'gSf', -- Find surrounding (to the right)
+    find_left      = 'gSF', -- Find surrounding (to the left)
+    highlight      = 'gSh', -- Highlight surrounding
+    replace        = 'gSr', -- Replace surrounding
+    update_n_lines = 'gSn'  -- Update `n_lines`
   }
 
   require('mini.surround').setup(configuration)
+
+  if has_wk then
+    wk.register({ ['gS'] = '+Surround' })
+  end
 end
 
 local function setup(use)
-  use({ 'echasnovski/mini.surround', config = configure, branch = 'stable' })
+  use({ 'echasnovski/mini.surround', config = configure, branch = 'stable', after = 'which-key.nvim' })
 end
 
 return { setup = setup }

@@ -11,7 +11,7 @@ vim.opt.hlsearch   = true
 vim.opt.ignorecase = true
 vim.opt.smartcase  = true
 
-vim.opt.timeoutlen    = 300
+vim.opt.timeoutlen    = 0
 vim.opt.rnu           = true
 vim.opt.numberwidth   = 3
 vim.opt.textwidth     = 0
@@ -29,4 +29,3 @@ vim.opt.guifont       = 'Hack Nerd Font'
 vim.opt.termguicolors = true
 
 vim.opt.colorcolumn = { 120 }
-vim.api.nvim_set_hl(0, 'ColorColumn', { ctermbg = 236 })

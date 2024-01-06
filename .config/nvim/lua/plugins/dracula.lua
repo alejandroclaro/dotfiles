@@ -1,9 +1,16 @@
 local function configure()
-  local is_ok, _ = pcall(vim.cmd, 'colorscheme dracula')
+  local dracula       = require('dracula')
+  local colors        = dracula.colors()
+  local configuration = {}
 
-  if not is_ok then
-    vim.notify('colorscheme not found!', 'error')
-  end
+  configuration.colors         = { bg = '#303030' }
+  configuration.transparent_bg = true
+
+  dracula.setup(configuration)
+
+  vim.cmd('colorscheme dracula')
+  vim.api.nvim_set_hl(0, 'BufferLineFill', { bg = colors.selection })
+  vim.api.nvim_set_hl(0, 'ColorColumn',    { bg = colors.selection })
 end
 
 local function setup(use)
