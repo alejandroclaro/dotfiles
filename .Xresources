@@ -1,5 +1,5 @@
 ! ------------------------------------------------------------------------------
-! Colour Configuration (solarized)
+! Colour Configuration (dracula)
 ! ------------------------------------------------------------------------------
 
 *.foreground: #F8F8F2
@@ -34,11 +34,11 @@ URxvt*boldItalicFont:	xft:M+ 1mn:bold italic:size=8
 ! Xft Font Configuration
 ! ------------------------------------------------------------------------------
 
-Xft.dpi: 96
+Xft.dpi:       96
 Xft.antialias: true
-Xft.hinting: true
-Xft.rgba: rgb
-Xft.autohint: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.autohint:  true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
@@ -90,7 +90,7 @@ XTerm.vt100.translations: #override \n\
 
 ! font spacing
 URxvt*letterSpace: 0
-URxvt.lineSpace: 0
+URxvt.lineSpace:   0
 
 ! general settings
 URxvt*saveline:			15000
@@ -99,28 +99,28 @@ URxvt*iso14755:			false
 URxvt*urgentOnBell:	true
 
 ! appearance
-URxvt*depth: 24
-URxvt*scrollBar: false
+URxvt*depth:           24
+URxvt*scrollBar:       false
 URxvt*scrollBar_right: false
-URxvt*internalBorder:	24
-URxvt*externalBorder:	0
-URxvt.geometry:	84x22
+URxvt*internalBorder:	 24
+URxvt*externalBorder:	 0
+URxvt.geometry:	       84x22
 
 ! perl extensions
 URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
 
 ! macros for clipboard and selection
-URxvt.copyCommand: xclip -i -selection clipboard
-URxvt.pasteCommand:	xclip -o -selection clipboard
-URxvt.keysym.M-c:	perl:clipboard:copy
-URxvt.keysym.M-v:	perl:clipboard:paste
-URxvt.keysym.M-C-v:	perl:clipboard:paste_escaped
+URxvt.copyCommand:     xclip -i -selection clipboard
+URxvt.pasteCommand:	   xclip -o -selection clipboard
+URxvt.keysym.M-c:	     perl:clipboard:copy
+URxvt.keysym.M-v:	     perl:clipboard:paste
+URxvt.keysym.M-C-v:	   perl:clipboard:paste_escaped
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.keysym.M-s:	perl:keyboard-select:search
-URxvt.keysym.M-u:	perl:url-select:select_next
-URxvt.urlLauncher: firefox
-URxvt.underlineURLs: true
-URxvt.urlButton: 1
+URxvt.keysym.M-s:	     perl:keyboard-select:search
+URxvt.keysym.M-u:	     perl:url-select:select_next
+URxvt.urlLauncher:     firefox
+URxvt.underlineURLs:   true
+URxvt.urlButton:       1
 
 ! scroll one line
 URxvt.keysym.Shift-Up:	 command:\033]720;1\007
@@ -137,18 +137,17 @@ URxvt.keysym.Control-Left:	\033[1;5D
 ! ------------------------------------------------------------------------------
 
 rofi.color-enabled: true
-rofi.color-window: #2e3440, #2e3440, #2e3440
-rofi.color-normal: #2e3440, #d8dee9, #2e3440, #2e3440, #bf616a
-rofi.color-active: #2e3440, #b48ead, #2e3440, #2e3440, #93e5cc
-rofi.color-urgent: #2e3440, #ebcb8b, #2e3440, #2e3440, #ebcb8b
-rofi.modi: run,drun,window
+rofi.color-window:  #2e3440, #2e3440, #2e3440
+rofi.color-normal:  #2e3440, #d8dee9, #2e3440, #2e3440, #bf616a
+rofi.color-active:  #2e3440, #b48ead, #2e3440, #2e3440, #93e5cc
+rofi.color-urgent:  #2e3440, #ebcb8b, #2e3440, #2e3440, #ebcb8b
+rofi.modi:          run,drun,window
 
 ! ------------------------------------------------------------------------------
 ! Dmenu configs
 ! ------------------------------------------------------------------------------
 
-dmenu.selforeground:	    #d8dee9
-dmenu.background:	        #2e3440
-dmenu.selbackground:	    #bf616a
-dmenu.foreground:	        #d8dee9
-
+dmenu.selforeground: #d8dee9
+dmenu.background:    #2e3440
+dmenu.selbackground: #bf616a
+dmenu.foreground:	   #d8dee9
