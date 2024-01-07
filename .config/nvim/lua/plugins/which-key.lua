@@ -9,10 +9,12 @@ local function configure()
   wk.setup(configuration)
 
   wk.register({
-    ['<leader>b'] = '+Buffer',
-    ['<leader>c'] = '+Code',
-    ['<leader>s'] = '+Search',
-    ['<leader>o'] = '+Open'
+    ['<leader>b']      = '+Buffer',
+    ['<localleader>c'] = '+Code',
+    ['<localleader>d'] = '+Debug',
+    ['<leader>s']      = '+Search',
+    ['<leader>o']      = '+Open',
+    ['<localleader>t'] = '+Test'
   })
 end
 

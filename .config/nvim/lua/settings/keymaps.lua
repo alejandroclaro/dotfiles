@@ -5,7 +5,7 @@ vim.g.mapleader      = ' '
 vim.g.maplocalleader = '\\'
 
 -- windows navigation
-map('', '<C-h>', '<C-w>h', { desc = 'Navigate to window left'  })
+map('', '<C-h>', '<C-w>h', { desc = 'Navigate to window left' })
 map('', '<C-j>', '<C-w>j', { desc = 'Navigate to window below' })
 map('', '<C-k>', '<C-w>k', { desc = 'Navigate to window above' })
 map('', '<C-l>', '<C-w>l', { desc = 'Navigate to window right' })
@@ -20,8 +20,8 @@ end
 map('n', '<Tab>', '<cmd>bnext<cr>',       { desc = 'Next buffer'     })
 map('n', '<S-Tab>', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
 
-for i=1,4 do
-  map('n', '<leader>' .. i, '<cmd>' .. i .. 'wincmd w<cr>', { desc = 'Navigate to' .. i .. 'window' })
+for i=1,5 do
+  map('n', '<leader>' .. i, '<cmd>' .. i .. 'wincmd w<cr>', { desc = 'Navigate to ' .. i .. ' window' })
 end
 
 -- window helpers
@@ -61,8 +61,6 @@ map('n', '<leader>bl', '<Cmd>BufferLineCloseLeft<CR>',                          
 map('n', '<leader>br', '<Cmd>BufferLineCloseRight<CR>',                            { desc = 'Delete buffers to the right' })
 
 -- delete, cut, copy, and paste
-map('n', '<leader>u', '<cmd>UndotreeToggle<cr>', { desc = 'Toggle undo window' })
-
 map('n', '<leader>W', '<cmd>Trim<cr>', { desc = 'Delete trailing white spaces'               })
 map('n', 'D',         'd$',            { desc = 'Delete the rest of the line', silent = true })
 
@@ -83,13 +81,13 @@ map('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move line up' })
 map('v', '<A-k>', ':m \'<-2<cr>gv=gv',       { desc = 'Move selection up' })
 
 -- searching
-map('n', '<leader>ss', '<cmd>Telescope current_buffer_fuzzy_find<cr>',                    { desc = 'Fuzzy find text'          })
-map('n', '<leader>sb', '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>',     { desc = 'Buffer'                   })
-map('n', '<leader>sf', '<cmd>Telescope git_files<cr>',                                    { desc = 'Git file'                 })
-map('n', '<leader>sg', '<cmd>Telescope live_grep<cr>',                                    { desc = 'Grep from cwd'            })
-map('n', '<leader>sw', '<cmd>Telescope grep_string<cr>',                                  { desc = 'Grep current word in cwd' })
-map('n', '<leader>sh', '<cmd>Telescope command_history<cr>',                              { desc = 'Command history'          })
-map('n', '<leader>sc', '<cmd>Telescope git_bcommits<cr>',                                 { desc = 'Git commits'              })
+map('n', '<leader>ss', '<cmd>Telescope current_buffer_fuzzy_find<cr>',                { desc = 'Fuzzy find text'          })
+map('n', '<leader>sb', '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>', { desc = 'Buffer'                   })
+map('n', '<leader>sf', '<cmd>Telescope git_files<cr>',                                { desc = 'Git file'                 })
+map('n', '<leader>sg', '<cmd>Telescope live_grep<cr>',                                { desc = 'Grep from cwd'            })
+map('n', '<leader>sw', '<cmd>Telescope grep_string<cr>',                              { desc = 'Grep current word in cwd' })
+map('n', '<leader>sh', '<cmd>Telescope command_history<cr>',                          { desc = 'Command history'          })
+map('n', '<leader>sc', '<cmd>Telescope git_bcommits<cr>',                             { desc = 'Git commits'              })
 
 map('n', '<C-t>', '<cmd>Telescope find_files hidden=true no_ignore_parent=true<cr>', { desc = 'Find files' })
 
@@ -99,13 +97,10 @@ map('n', '<leader>/',  '<cmd>Telescope resume<cr>', { desc = 'Resume last search
 map('n', 'Q', '@q',               { desc = 'Run macro in q register' })
 map('v', 'Q', '<cmd>norm @q<cr>', { desc = 'Run macro in q register' })
 
--- quickfix, location, and diagnostic lists
+-- quickfix, location, and undo lists
 map('n', '<leader>ol', '<cmd>TroubleToggle loclist<cr>',  { desc = 'Open location list window' })
 map('n', '<leader>oq', '<cmd>TroubleToggle quickfix<cr>', { desc = 'Open quickfix list window' })
-
-map('n', '<leader>ox', '<cmd>TroubleToggle document_diagnostics<cr>', { desc = 'Open diagnostics list window' })
-map('n', ']d',         vim.diagnostic.goto_next,                      { desc = 'Next Diagnostic'              })
-map('n', '[d',         vim.diagnostic.goto_prev,                      { desc = 'Prev Diagnostic'              })
+map('n', '<leader>ou', '<cmd>Telescope undo<cr>',         { desc = 'Open undo tree window'     })
 
 -- file management
 map('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = 'Toggle file explorer' })
@@ -115,21 +110,73 @@ map('n', '<leader>E', '<cmd>Neotree reveal<cr>', { desc = 'Reveal buffer fle in 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     -- go to
-    map('n', 'gd', '<cmd>Telescope lsp_definitions reuse_win=true<cr>',     { desc = 'Goto declaration'    })
-    map('n', 'gI', '<cmd>Telescope lsp_implementations reuse_win=true<cr>', { desc = 'Goto implementation' })
-    map('n', 'gr', '<cmd>Telescope lsp_references<cr>',                     { desc = 'Goto references' })
-    map('n', 'gs', '<cmd>Telescope aerial<cr>',                             { desc = 'Goto symbol' })
+    map('n', 'gd', '<cmd>Lspsaga goto_definition<cr>',  { desc = 'Goto definition/declaration'    })
+    map('n', 'gr', '<cmd><Lspsaga incoming_calls<cr>',  { desc = 'Goto references' })
+    map('n', 'gR', '<cmd>Lspsaga finder<cr>',           { desc = 'Find references' })
+    map('n', 'gs', '<cmd>Telescope aerial<cr>',         { desc = 'Goto symbol' })
 
     map('n', '<M-Down>', '<cmd>AerialNext<cr>', { desc = 'Goto next symbol' })
     map('n', '<M-Up>',   '<cmd>AerialPrev<cr>', { desc = 'Goto previous symbol' })
 
     map('n', '<leader><Tab>', '<cmd>ClangdSwitchSourceHeader<cr>', { desc = 'Alternate source/header' })
 
-    -- refactor
-    map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
+    -- help and diagnostics
+    map('n', '<leader>ox', '<cmd>TroubleToggle document_diagnostics<cr>', { desc = 'Open diagnostics list window' })
+    map('n', ']d',         '<cmd>Lspsaga diagnostic_jump_next<cr>',       { desc = 'Next diagnostic'              })
+    map('n', '[d',         '<cmd>Lspsaga diagnostic_jump_prev<cr>',       { desc = 'Prev diagnostic'              })
 
-    map({ 'n', 'v' }, '<leader>cf', '<cmd>Format<cr>', { desc = 'Code format' })
-    map({ 'n', 'v' }, '<C-f>',      '<cmd>Format<cr>', { desc = 'Code format' })
+    map('n', 'K', '<cmd>Lspsaga hover_doc<cr>', { desc = 'Show documentation' })
+
+    -- coding helpers
+    map({ 'n', 'v' }, '<localleader>ca', '<cmd>Lspsaga code_action<cr>', { desc = 'Code action' })
+
+    map({ 'n' }, '<localleader>cr', '<cmd>Lspsaga rename<cr>', { desc = 'Rename symbol under cursor' })
+    map({ 'n' }, '<F2>',            '<cmd>Lspsaga rename<cr>', { desc = 'Rename symbol under cursor' })
+
+    map({ 'n', 'v' }, '<localleader>cf', '<cmd>Format<cr>', { desc = 'Code format' })
+    map({ 'n', 'v' }, '<C-f>',           '<cmd>Format<cr>', { desc = 'Code format' })
+
+    -- debugging
+    map({ 'n'      }, '<localleader>du', function() require("dapui").toggle({}) end,  { desc = 'Open debug windows'           })
+    map({ 'n', 'v' }, '<localleader>de', function() require("dapui").eval() end,      { desc = 'Eval expression under cursor' })
+    map({ 'n'      }, '<localleader>dc', function() require("dap").continue() end,    { desc = 'Continue'                     })
+    map({ 'n'      }, '<localleader>dp', function() require("dap").pause() end,       { desc = 'Pause'                        })
+    map({ 'n'      }, '<localleader>dt', function() require("dap").terminate() end,   { desc = 'Terminate'                    })
+    map({ 'n'      }, '<localleader>dr', function() require("dap").repl.toggle() end, { desc = 'Toogle REPL'                  })
+
+    map({ 'n' }, '<localleader>db', function() require("dap").toggle_breakpoint() end, { desc = 'Toggle breakpoint' })
+    map({ 'n' }, '<F9>',            function() require("dap").toggle_breakpoint() end, { desc = 'Toggle breakpoint' })
+
+    map({ 'n' }, '<localleader>ds', function() require("dap").step_over() end, { desc = 'Step over' })
+    map({ 'n' }, '<F10>',           function() require("dap").step_over() end, { desc = 'Step over' })
+
+    map({ 'n' }, '<localleader>di', function() require("dap").step_into() end, { desc = 'Step into' })
+    map({ 'n' }, '<F11>',           function() require("dap").step_into() end, { desc = 'Step into' })
+
+    map({ 'n' }, '<localleader>do', function() require("dap").step_out() end, { desc = 'Step out' })
+    map({ 'n' }, '<F12>',           function() require("dap").step_out() end, { desc = 'Step out' })
+
+    -- unit tests
+    map({ 'n' }, '<localleader>tt', function() require("neotest").run.run() end,               { desc = 'Run file' })
+    map({ 'n' }, '<localleader>tr', function() require("neotest").run.run('%') end,            { desc = 'Run all test in file' })
+    map({ 'n' }, '<localleader>tR', function() require("neotest").run.run(vim.loop.cwd()) end, { desc = 'Run all test files' })
+    map({ 'n' }, '<localleader>tk', function() require("neotest").run.stop() end,              { desc = 'Stops (Kills) test execution' })
+    map({ 'n' }, '<localleader>ts', function() require("neotest").summary.toggle() end,        { desc = 'Toggle tests summary' })
+    map({ 'n' }, '<localleader>to', function() require("neotest").output_panel.toggle() end,   { desc = 'Toggle test output' })
   end
 })
+
+-- AI assistance
+map({ 'n' }, '<leader>aa', '<cmd>ChatGPT<cr>', { desc = 'Open AI chat window' })
+
+map({ 'n', 'v' }, '<leader>ad', '<cmd>ChatGPTRun docstring<cr>',                 { desc = 'Document function'         })
+map({ 'n', 'v' }, '<leader>ae', '<cmd>ChatGPTEditWithInstruction<cr>',           { desc = 'Edit with instructions'    })
+map({ 'n', 'v' }, '<leader>at', '<cmd>ChatGPTRun translate<cr>',                 { desc = 'Translate to English'      })
+map({ 'n', 'v' }, '<leader>ag', '<cmd>ChatGPTRun grammar_correction<cr>',        { desc = 'Correct grammar'           })
+map({ 'n', 'v' }, '<leader>ak', '<cmd>ChatGPTRun keywords<cr>',                  { desc = 'Extract the main keywords' })
+map({ 'n', 'v' }, '<leader>as', '<cmd>ChatGPTRun summarize<cr>',                 { desc = 'Summarize the text'        })
+map({ 'n', 'v' }, '<leader>ar', '<cmd>ChatGPTRun code_readability_analysis<cr>', { desc = 'Analyze readability'       })
+map({ 'n', 'v' }, '<leader>ax', '<cmd>ChatGPTRun explain_code<cr>',              { desc = 'Explain the code'          })
+map({ 'n', 'v' }, '<leader>az', '<cmd>ChatGPTRun add_tests<cr>',                 { desc = 'Add tests'                 })
+
 

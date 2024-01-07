@@ -2,12 +2,18 @@ local function configure()
   local telescope = require('telescope')
 
   telescope.setup()
-  telescope.load_extension("fzf")
+  telescope.load_extension('aerial')
+  telescope.load_extension('fzf')
+  telescope.load_extension('undo')
 end
 
 local function setup(use)
-  use({ 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' })
-  use({ 'nvim-telescope/telescope-fzf-native.nvim', config = configure, after = 'telescope.nvim', run = 'make' })
+  local requires = 'nvim-lua/plenary.nvim'
+  local after    = { 'telescope.nvim', 'telescope-undo.nvim' }
+
+  use({ 'nvim-telescope/telescope.nvim', requires = requires })
+  use({ 'debugloop/telescope-undo.nvim', after = 'telescope.nvim' })
+  use({ 'nvim-telescope/telescope-fzf-native.nvim', config = configure, after = after, run = 'make' })
 end
 
 return { setup = setup }

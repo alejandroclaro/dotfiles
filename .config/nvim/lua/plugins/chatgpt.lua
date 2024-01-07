@@ -27,6 +27,18 @@ local function configure()
     n = 1
   }
 
+  configuration.edit_with_instructions = {
+    keymaps = {
+      close               = "<C-c>",
+      accept              = "<C-y>",
+      toggle_diff         = "<C-d>",
+      toggle_settings     = "<C-o>",
+      toggle_help         = "<C-h>",
+      cycle_windows       = "<Tab>",
+      use_output_as_input = "<C-a>"
+    }
+  }
+
   require('chatgpt').setup(configuration)
 end
 
@@ -37,7 +49,11 @@ local function setup(use)
     'nvim-telescope/telescope.nvim'
   }
 
-  use({ 'alejandroclaro/ChatGPT.nvim', config = configure, requires = requires })
+  local after = {
+    'telescope.nvim'
+  }
+
+  use({ 'alejandroclaro/ChatGPT.nvim', config = configure, after = after, requires = requires })
 end
 
 return { setup = setup }

@@ -11,7 +11,7 @@ function _G.build_diff_component()
 end
 
 function _G.build_diagnostic_component()
-  return { 'diagnostics', symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' } }
+  return { 'diagnostics', symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' } }
 end
 
 function _G.build_lsp_component()
@@ -34,8 +34,8 @@ local function configure()
     lualine_a = { 'mode' },
     lualine_b = { 'branch', _G.build_diff_component() },
     lualine_c = { 'filename', _G.build_diagnostic_component(), _G.build_lsp_component() },
-    lualine_x = { 'filetype' },
-    lualine_y = { { 'encoding', padding = 0 },  { 'fileformat', padding = 1 } },
+    lualine_x = { },
+    lualine_y = { { 'filetype', icon_only = true }, { 'fileformat', padding = 1 }, { 'encoding', padding = 1 } },
     lualine_z = { { 'progress', padding = 1 }, { 'location', padding = 0 } }
   }
 
