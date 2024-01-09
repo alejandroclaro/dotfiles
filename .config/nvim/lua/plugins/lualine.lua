@@ -1,3 +1,15 @@
+function _G.build_spell_language_component()
+  return function()
+    if vim.opt.spell:get() ~= true then
+      return ''
+    end
+
+    local lang = table.concat(vim.opt_local.spelllang:get(), '/')
+
+    return'SPELL [' .. lang .. ']'
+  end
+end
+
 function _G.build_diff_component()
   local function get_diff_source()
     local gitsigns = vim.b.gitsigns_status_dict
@@ -31,9 +43,9 @@ local function configure()
   }
 
   configuration.sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { 'branch', _G.build_diff_component() },
-    lualine_c = { 'filename', _G.build_diagnostic_component(), _G.build_lsp_component() },
+    lualine_a = { { 'mode' }, { _G.build_spell_language_component() } },
+    lualine_b = { { 'branch' }, _G.build_diff_component() },
+    lualine_c = { { 'filename' }, _G.build_diagnostic_component(), _G.build_lsp_component() },
     lualine_x = { },
     lualine_y = { { 'filetype', icon_only = true }, { 'fileformat', padding = 1 }, { 'encoding', padding = 1 } },
     lualine_z = { { 'progress', padding = 1 }, { 'location', padding = 0 } }

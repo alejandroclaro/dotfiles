@@ -1,5 +1,7 @@
 local map = vim.keymap.set
 
+map('n', '<F1>', '<cmd>WhichKey<cr>', { desc = 'This help' })
+
 -- leader keys
 vim.g.mapleader      = ' '
 vim.g.maplocalleader = '\\'
@@ -111,8 +113,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     -- go to
     map('n', 'gd', '<cmd>Lspsaga goto_definition<cr>',  { desc = 'Goto definition/declaration'    })
-    map('n', 'gr', '<cmd><Lspsaga incoming_calls<cr>',  { desc = 'Goto references' })
+    map('n', 'gr', '<cmd>Telescope lsp_references<cr>', { desc = 'Goto references' })
     map('n', 'gR', '<cmd>Lspsaga finder<cr>',           { desc = 'Find references' })
+    map('n', 'gC', '<cmd>Lspsaga incoming_calls<cr>',   { desc = 'Goto references' })
     map('n', 'gs', '<cmd>Telescope aerial<cr>',         { desc = 'Goto symbol' })
 
     map('n', '<M-Down>', '<cmd>AerialNext<cr>', { desc = 'Goto next symbol' })
@@ -128,13 +131,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', 'K', '<cmd>Lspsaga hover_doc<cr>', { desc = 'Show documentation' })
 
     -- coding helpers
-    map({ 'n', 'v' }, '<localleader>ca', '<cmd>Lspsaga code_action<cr>', { desc = 'Code action' })
+    map({ 'n', 'v' }, '<localleader>cf', '<cmd>Format<cr>', { desc = 'Code format current line/selection' })
+    map({ 'n', 'v' }, '<F2>',            '<cmd>Format<cr>', { desc = 'Code format current line/selection' })
 
-    map({ 'n' }, '<localleader>cr', '<cmd>Lspsaga rename<cr>', { desc = 'Rename symbol under cursor' })
-    map({ 'n' }, '<F2>',            '<cmd>Lspsaga rename<cr>', { desc = 'Rename symbol under cursor' })
+    map({ 'n' }, '<localleader>cr', '<cmd>Lspsaga rename<cr>', { desc = 'Code rename symbol under cursor' })
+    map({ 'n' }, '<F3>',            '<cmd>Lspsaga rename<cr>', { desc = 'Code rename symbol under cursor' })
 
-    map({ 'n', 'v' }, '<localleader>cf', '<cmd>Format<cr>', { desc = 'Code format' })
-    map({ 'n', 'v' }, '<C-f>',           '<cmd>Format<cr>', { desc = 'Code format' })
+    map({ 'n', 'v' }, '<localleader>ca', '<cmd>Lspsaga code_action<cr>', { desc = 'Code Action' })
+    map({ 'n', 'v' }, '<F4>',            '<cmd>Lspsaga code_action<cr>', { desc = 'Code action' })
 
     -- debugging
     map({ 'n'      }, '<localleader>du', function() require("dapui").toggle({}) end,  { desc = 'Open debug windows'           })
@@ -145,24 +149,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map({ 'n'      }, '<localleader>dr', function() require("dap").repl.toggle() end, { desc = 'Toogle REPL'                  })
 
     map({ 'n' }, '<localleader>db', function() require("dap").toggle_breakpoint() end, { desc = 'Toggle breakpoint' })
-    map({ 'n' }, '<F9>',            function() require("dap").toggle_breakpoint() end, { desc = 'Toggle breakpoint' })
-
     map({ 'n' }, '<localleader>ds', function() require("dap").step_over() end, { desc = 'Step over' })
-    map({ 'n' }, '<F10>',           function() require("dap").step_over() end, { desc = 'Step over' })
-
     map({ 'n' }, '<localleader>di', function() require("dap").step_into() end, { desc = 'Step into' })
-    map({ 'n' }, '<F11>',           function() require("dap").step_into() end, { desc = 'Step into' })
-
     map({ 'n' }, '<localleader>do', function() require("dap").step_out() end, { desc = 'Step out' })
-    map({ 'n' }, '<F12>',           function() require("dap").step_out() end, { desc = 'Step out' })
 
     -- unit tests
-    map({ 'n' }, '<localleader>tt', function() require("neotest").run.run() end,               { desc = 'Run file' })
-    map({ 'n' }, '<localleader>tr', function() require("neotest").run.run('%') end,            { desc = 'Run all test in file' })
-    map({ 'n' }, '<localleader>tR', function() require("neotest").run.run(vim.loop.cwd()) end, { desc = 'Run all test files' })
-    map({ 'n' }, '<localleader>tk', function() require("neotest").run.stop() end,              { desc = 'Stops (Kills) test execution' })
-    map({ 'n' }, '<localleader>ts', function() require("neotest").summary.toggle() end,        { desc = 'Toggle tests summary' })
-    map({ 'n' }, '<localleader>to', function() require("neotest").output_panel.toggle() end,   { desc = 'Toggle test output' })
+    map({ 'n' }, '<localleader>tt', function() require("neotest").run.run() end,                     { desc = 'Run test under cursor' })
+    map({ 'n' }, '<localleader>td', function() require("neotest").run.run({ strategy = 'dap' }) end, { desc = 'Debug test under cursor' })
+    map({ 'n' }, '<localleader>tr', function() require("neotest").run.run(vim.fn.expand('%')) end,   { desc = 'Run all tests in file' })
+    map({ 'n' }, '<localleader>tR', function() require("neotest").run.run(vim.fn.getcwd()) end,      { desc = 'Run all tests in workspace' })
+    map({ 'n' }, '<localleader>tw', function() require("neotest").watch.toggle('%') end,             { desc = 'Watch all tests in file' })
+    map({ 'n' }, '<localleader>tw', function() require("neotest").watch.toggle(vim.loop.cwd()) end,  { desc = 'Watch all tests in workspace' })
+    map({ 'n' }, '<localleader>tk', function() require("neotest").run.stop() end,                    { desc = 'Stops (Kills) test execution' })
+    map({ 'n' }, '<localleader>ts', function() require("neotest").summary.toggle() end,              { desc = 'Toggle tests summary' })
+    map({ 'n' }, '<localleader>to', function() require("neotest").output_panel.toggle() end,         { desc = 'Toggle test output' })
   end
 })
 

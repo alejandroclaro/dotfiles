@@ -2,6 +2,10 @@ local function configure()
   local has_wk, wk    = pcall(require, 'which-key')
   local configuration = {}
 
+  if has_wk then
+    wk.register({ ['gS'] = '+surround' })
+  end
+
   configuration.mappings = {
     add            = 'gSa', -- Add surrounding in Normal and Visual modes
     delete         = 'gSd', -- Delete surrounding
@@ -13,10 +17,6 @@ local function configure()
   }
 
   require('mini.surround').setup(configuration)
-
-  if has_wk then
-    wk.register({ ['gS'] = '+Surround' })
-  end
 end
 
 local function setup(use)

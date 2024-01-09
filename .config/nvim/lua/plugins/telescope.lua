@@ -1,7 +1,15 @@
 local function configure()
-  local telescope = require('telescope')
+  local telescope     = require('telescope')
+  local configuration = {}
 
-  telescope.setup()
+  configuration.mappings = {
+    i = {
+      ['C-q'] = require("trouble.providers.telescope").open_with_trouble,
+      ['M-q'] = require("trouble.providers.telescope").open_selected_with_trouble
+    }
+  }
+
+  telescope.setup(configuration)
   telescope.load_extension('aerial')
   telescope.load_extension('fzf')
   telescope.load_extension('undo')
