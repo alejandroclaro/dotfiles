@@ -59,19 +59,18 @@ function _G.jtest_cwd(path)
 end
 
 function _G.neotest_filter_dir(name)
-  return (name ~= 'build') and (name ~= 'example')
+  return (name ~= 'build') and (name ~= 'examples')
 end
 
 local function configure()
   local configuration  = {}
-  local gtest_adapter  = require('neotest-gtest').setup({ is_test_file = _G.gtest_is_test_file, mappings = { configure = 'C' } })
+  local gtest_adapter  = require('neotest-gtest').setup({ filter_dir = _G.neotest_filter_dir, is_test_file = _G.gtest_is_test_file, mappings = { configure = 'C' } })
   local jest_adapter   = require('neotest-jest')({ jestCommand = 'yarn run jest', jestConfigFile = _G.jtest_config_file, cwd = _G.jtest_cwd })
   local pytest_adapter = require('neotest-python')({})
 
   jest_adapter.is_test_file = _G.jtest_is_test_file
 
   configuration.adapters   = { gtest_adapter, jest_adapter, pytest_adapter }
-  configuration.filter_dir = _G.neotest_filter_dir
 
   require('neotest').setup(configuration)
 end

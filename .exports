@@ -1,7 +1,7 @@
-export TERM=xterm-256color
-export TERMINAL=xterm
+export TERM=alacritty
+export TERMINAL=alacritty
 
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 export HISTSIZE='32768';

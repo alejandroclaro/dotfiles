@@ -3,10 +3,10 @@ set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH /usr/local/lib /usr/local/lib/gtk-3.0/mo
 
 set -x ANDROID_HOME /opt/android/sdk/
 
-set -x TERM xterm-256color
-set -x TERMINAL xterm
+set -x TERM alacritty
+set -x TERMINAL $TERM
 
-set -x VISUAL vim
+set -x VISUAL nvim
 set -x EDITOR $VISUAL
 
 set -x HISTSIZE 32768

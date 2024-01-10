@@ -2,7 +2,7 @@
 	email = alejandro.claro@smartmatic.com
 	name = Alejandro Claro
 [core]
-	editor = vim
+	editor = nvim
 	pager = delta
 [diff]
 	colorMoved = default

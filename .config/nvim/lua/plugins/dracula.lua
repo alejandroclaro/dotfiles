@@ -1,9 +1,10 @@
 local function configure()
   local dracula       = require('dracula')
   local colors        = dracula.colors()
+  local bg            = '#303030'
   local configuration = {}
 
-  configuration.colors         = { bg = '#303030' }
+  configuration.colors         = { bg = bg }
   configuration.transparent_bg = true
 
   dracula.setup(configuration)

@@ -69,7 +69,7 @@ local function configure()
 end
 
 local function setup(use)
-  local after    = 'lsp-progress.nvim'
+  local after    =  { 'lsp-progress.nvim', 'dracula.nvim' }
   local requires = 'nvim-tree/nvim-web-devicons'
 
   use({ 'nvim-lualine/lualine.nvim', config = configure, after = after, requires = requires })

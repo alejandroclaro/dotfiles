@@ -1,4 +1,4 @@
-function _G.on_bufferline_add_buffer()
+function _G.bufferline_on_add_buffer()
   vim.schedule(function() pcall(nvim_bufferline) end)
 end
 
@@ -14,15 +14,14 @@ local function configure()
     offsets = { neotree_offset }
   }
 
-  vim.o.termguicolors = true
-  require('bufferline').setup({ options = options })
+  require('bufferline').setup({ options = options, highlights = highlights })
 
   -- Fix bufferline when restoring a session
-  vim.api.nvim_create_autocmd('BufAdd', { callback = _G.on_bufferline_add_buffer })
+  vim.api.nvim_create_autocmd('BufAdd', { callback = _G.bufferline_on_add_buffer })
 end
 
 local function setup(use)
-  use({ 'akinsho/bufferline.nvim', config = configure, tag = '*', requires = 'nvim-tree/nvim-web-devicons' })
+  use({ 'akinsho/bufferline.nvim', config = configure, tag = '*', after = { 'dracula.nvim' }, requires = 'nvim-tree/nvim-web-devicons' })
 end
 
 return { setup = setup }

@@ -221,13 +221,12 @@ for_window [class = "Alacritty$" title="^workspace 10$"] move to workspace $work
 for_window [class = "Spotify"] move to workspace $workspace5
 
 # Startup programs
-exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id dex -a -e i3 -s ~/.config/autostart/
-exec --no-startup-id i3-msg 'workspace $workspace1; exec alacritty -T "workspace 1" -e tmux new -s "terminal"'
+exec --no-startup-id i3-msg 'workspace $workspace1; exec alacritty -T "workspace 1" -e fish -C "tmux new -s terminal"'
 exec --no-startup-id i3-msg 'workspace $workspace2; exec /opt/cisco/anyconnect/bin/vpnui'
 exec --no-startup-id i3-msg 'workspace $workspace3; exec firefox'
 exec --no-startup-id i3-msg 'workspace $workspace4; exec google-chrome --app="https://teams.microsoft.com"'
 exec --no-startup-id i3-msg 'workspace $workspace5; exec spotify'
-exec --no-startup-id i3-msg 'workspace $workspace9; exec alacritty -T "workspace 9" -e tmux new -s "coding 1"'
-exec --no-startup-id i3-msg 'workspace $workspace10; exec alacritty -T "workspace 10" -e tmux new -s "coding 2"'
+exec --no-startup-id i3-msg 'workspace $workspace9; exec alacritty -T "workspace 9" -e fish -C "tmux new -s coding1"'
+exec --no-startup-id i3-msg 'workspace $workspace10; exec alacritty -T "workspace 10" -e fish -C "tmux new -s coding2"'
 

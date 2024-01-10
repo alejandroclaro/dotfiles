@@ -1,5 +1,5 @@
 ! ------------------------------------------------------------------------------
-! Colour Configuration (dracula)
+! Colour Configuration (solarized)
 ! ------------------------------------------------------------------------------
 
 *.foreground: #F8F8F2
@@ -111,13 +111,13 @@ URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
 
 ! macros for clipboard and selection
 URxvt.copyCommand:     xclip -i -selection clipboard
-URxvt.pasteCommand:	   xclip -o -selection clipboard
-URxvt.keysym.M-c:	     perl:clipboard:copy
-URxvt.keysym.M-v:	     perl:clipboard:paste
-URxvt.keysym.M-C-v:	   perl:clipboard:paste_escaped
+URxvt.pasteCommand:    xclip -o -selection clipboard
+URxvt.keysym.M-c:      perl:clipboard:copy
+URxvt.keysym.M-v:      perl:clipboard:paste
+URxvt.keysym.M-C-v:    perl:clipboard:paste_escaped
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.keysym.M-s:	     perl:keyboard-select:search
-URxvt.keysym.M-u:	     perl:url-select:select_next
+URxvt.keysym.M-s:	perl:keyboard-select:search
+URxvt.keysym.M-u:	perl:url-select:select_next
 URxvt.urlLauncher:     firefox
 URxvt.underlineURLs:   true
 URxvt.urlButton:       1
@@ -150,4 +150,4 @@ rofi.modi:          run,drun,window
 dmenu.selforeground: #d8dee9
 dmenu.background:    #2e3440
 dmenu.selbackground: #bf616a
-dmenu.foreground:	   #d8dee9
+dmenu.foreground:    #d8dee9
