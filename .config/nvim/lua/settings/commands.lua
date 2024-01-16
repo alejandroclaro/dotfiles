@@ -10,5 +10,13 @@ local function format(args)
   require('conform').format({ async = true, lsp_fallback = true, range = range })
 end
 
+local function trim()
+  local trailspace = require('mini.trailspace')
+
+  trailspace.trim()
+  trailspace.trim_last_lines()
+end
+
 vim.api.nvim_create_user_command('Format', format, { range = true })
+vim.api.nvim_create_user_command('Trim', trim, {})
 

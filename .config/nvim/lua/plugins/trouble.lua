@@ -1,5 +1,11 @@
 local function configure()
-  require('trouble').setup()
+  local configuration = {}
+
+  configuration.action_keys = {
+    help = '<C-h>'
+  }
+
+  require('trouble').setup(configuration)
 end
 
 local function setup(use)

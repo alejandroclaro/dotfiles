@@ -1,11 +1,11 @@
 local function toggle_numbers_on()
   vim.opt.rnu = false
-  vim.opt.nu  = true
+  vim.opt.nu = true
 end
 
 local function toggle_relative_on()
   vim.opt.rnu = true
-  vim.opt.nu  = false
+  vim.opt.nu = false
 end
 
 -- Show relative or absolute line number

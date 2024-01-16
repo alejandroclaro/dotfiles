@@ -11,14 +11,14 @@ local function setup(use)
   use({ 'wbthomason/packer.nvim' })
   use({ 'nvim-lua/plenary.nvim' })
 
-  local fs          = require('plenary.scandir')
-  local path        = require('plenary.path')
-  local base_dir    = path:new(vim.fn.stdpath("config")):joinpath('/lua')
+  local fs = require('plenary.scandir')
+  local path = require('plenary.path')
+  local base_dir = path:new(vim.fn.stdpath('config')):joinpath('/lua')
   local plugins_dir = base_dir:joinpath('plugins')
-  local files       = fs.scan_dir(tostring(plugins_dir), { search_pattern = '%.lua$' })
+  local files = fs.scan_dir(tostring(plugins_dir), { search_pattern = '%.lua$' })
 
   for _, file in ipairs(files) do
-    local filename    = path:new(file):make_relative(tostring(base_dir))
+    local filename = path:new(file):make_relative(tostring(base_dir))
     local module_name = vim.split(filename, '%.')[1]
 
     require(module_name).setup(use)
