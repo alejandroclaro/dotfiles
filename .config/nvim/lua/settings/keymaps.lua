@@ -1,10 +1,31 @@
+local wk = require("which-key")
 local map = vim.keymap.set
-
-map('n', '<F1>', '<cmd>WhichKey<cr>', { desc = 'This help' })
 
 -- leader keys
 vim.g.mapleader      = ' '
 vim.g.maplocalleader = '\\'
+
+wk.register({
+  ['[']  = { name = '+Previous/Enable' },
+  [']']  = { name = '+Next/Disable' },
+  ['[o'] = { name = '+Enable' },
+  [']o'] = { name = '+Disable' },
+  ['<leader>'] = { name = '+More working shortcuts' },
+  ['<leader>a'] = { name = '+Assistance (AI)' },
+  ['<leader>b'] = { name = '+Buffer' },
+  ['<leader>s'] = { name = '+Search' },
+  ['<leader>o'] = { name = '+Open' },
+  ['d]'] = { name = '+To next unmached group' },
+  ['d['] = { name = '+To previous unmached group' },
+  ['dg'] = { name = '+To motion' },
+  ['g']  = { name = '+Goto/Commenting/Casing/Surrounding' },
+  ['y]'] = { name = '+To next unmached group' },
+  ['y['] = { name = '+To previous unmached group' },
+  ['yg'] = { name = '+To motion' },
+  ['z']  = { name = '+Spelling/Folding/Cursor' }
+})
+
+map('n', '<F1>', '<cmd>WhichKey<cr>', { desc = 'This help' })
 
 -- windows navigation
 map('', '<C-h>', '<C-w>h', { desc = 'Navigate to window left' })
@@ -106,75 +127,7 @@ map('n', '<leader>ou', '<cmd>Telescope undo<cr>',         { desc = 'Open undo tr
 
 -- file management
 map('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = 'Toggle file explorer' })
-map('n', '<leader>E', '<cmd>Neotree reveal<cr>', { desc = 'Reveal buffer fle in explorer' })
-
--- language specific
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local buffer = args.buf
-
-    vim.bo[buffer].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    -- go to
-    map('n', 'gd', '<cmd>Lspsaga goto_definition<cr>',  { buffer = buffer, desc = 'Goto definition/declaration'    })
-    map('n', 'gr', '<cmd>Telescope lsp_references<cr>', { buffer = buffer, desc = 'Goto references' })
-    map('n', 'gR', '<cmd>Lspsaga finder<cr>',           { buffer = buffer, desc = 'Find references' })
-    map('n', 'gC', '<cmd>Lspsaga incoming_calls<cr>',   { buffer = buffer, desc = 'Goto references' })
-    map('n', 'gs', '<cmd>Telescope aerial<cr>',         { buffer = buffer, desc = 'Goto symbol' })
-
-    map('n', '<M-Down>', '<cmd>AerialNext<cr>', { buffer = buffer, desc = 'Goto next symbol' })
-    map('n', '<M-Up>',   '<cmd>AerialPrev<cr>', { buffer = buffer, desc = 'Goto previous symbol' })
-
-    map('n', '<leader><Tab>', '<cmd>ClangdSwitchSourceHeader<cr>', { buffer = buffer, desc = 'Alternate source/header' })
-
-    -- help and diagnostics
-    map('n', '<leader>ox', '<cmd>TroubleToggle document_diagnostics<cr>', { buffer = buffer, desc = 'Open diagnostics list window' })
-    map('n', ']d',         '<cmd>Lspsaga diagnostic_jump_next<cr>',       { buffer = buffer, desc = 'Next diagnostic'              })
-    map('n', '[d',         '<cmd>Lspsaga diagnostic_jump_prev<cr>',       { buffer = buffer, desc = 'Prev diagnostic'              })
-
-    map({ 'n'      }, 'K',     '<cmd>Lspsaga hover_doc<cr>', { buffer = buffer, desc = 'Show documentation' })
-    map({ 'n', 'x' }, '<C-k>', vim.lsp.buf.signature_help,   { buffer = buffer, desc = 'Signature Help' })
-
-    -- coding helpers
-    map({ 'n', 'v' }, '<localleader>cf', '<cmd>Format<cr>', { buffer = buffer, desc = 'Code format current line/selection' })
-    map({ 'n', 'v' }, '<F2>',            '<cmd>Format<cr>', { buffer = buffer, desc = 'Code format current line/selection' })
-
-    map({ 'n' }, '<localleader>cr', '<cmd>Lspsaga rename<cr>', { buffer = buffer, desc = 'Code rename symbol under cursor' })
-    map({ 'n' }, '<F3>',            '<cmd>Lspsaga rename<cr>', { buffer = buffer, desc = 'Code rename symbol under cursor' })
-
-    map({ 'n', 'v' }, '<localleader>ca', '<cmd>Lspsaga code_action<cr>', { buffer = buffer, desc = 'Code Action' })
-    map({ 'n', 'v' }, '<F4>',            '<cmd>Lspsaga code_action<cr>', { buffer = buffer, desc = 'Code action' })
-
-    map('n', '<leader>cp', 'v:lua.MiniSplitjoin.operator("toggle") . " "', { buffer = buffer, expr = true, desc = 'Split/Join parameters' })
-    map('n', '<F5>',       'v:lua.MiniSplitjoin.operator("toggle") . " "', { buffer = buffer, expr = true, desc = 'Split/Join parameters' })
-    map('x', '<F5>',       '<cmd><C-u>lua MiniSplitjoin.toggle({ region = MiniSplitjoin.get_visual_region() })<cr>', { buffer = buffer, desc = 'Split/Join parameters' })
-
-   
-    -- debugging
-    map({ 'n'      }, '<localleader>du', function() require('dapui').toggle({}) end,  { buffer = buffer, desc = 'Open debug windows'           })
-    map({ 'n', 'v' }, '<localleader>de', function() require('dapui').eval() end,      { buffer = buffer, desc = 'Eval expression under cursor' })
-    map({ 'n'      }, '<localleader>dc', function() require('dap').continue() end,    { buffer = buffer, desc = 'Continue'                     })
-    map({ 'n'      }, '<localleader>dp', function() require('dap').pause() end,       { buffer = buffer, desc = 'Pause'                        })
-    map({ 'n'      }, '<localleader>dt', function() require('dap').terminate() end,   { buffer = buffer, desc = 'Terminate'                    })
-    map({ 'n'      }, '<localleader>dr', function() require('dap').repl.toggle() end, { buffer = buffer, desc = 'Toogle REPL'                  })
-
-    map({ 'n' }, '<localleader>db', function() require('dap').toggle_breakpoint() end, { buffer = buffer, desc = 'Toggle breakpoint' })
-    map({ 'n' }, '<localleader>ds', function() require('dap').step_over() end, { buffer = buffer, desc = 'Step over' })
-    map({ 'n' }, '<localleader>di', function() require('dap').step_into() end, { buffer = buffer, desc = 'Step into' })
-    map({ 'n' }, '<localleader>do', function() require('dap').step_out() end, { buffer = buffer, desc = 'Step out' })
-
-    -- unit tests
-    map({ 'n' }, '<localleader>tt', function() require('neotest').run.run() end,                     { buffer = buffer, desc = 'Run test under cursor' })
-    map({ 'n' }, '<localleader>td', function() require('neotest').run.run({ strategy = 'dap' }) end, { buffer = buffer, desc = 'Debug test under cursor' })
-    map({ 'n' }, '<localleader>tr', function() require('neotest').run.run(vim.fn.expand('%')) end,   { buffer = buffer, desc = 'Run all tests in file' })
-    map({ 'n' }, '<localleader>tR', function() require('neotest').run.run(vim.fn.getcwd()) end,      { buffer = buffer, desc = 'Run all tests in workspace' })
-    map({ 'n' }, '<localleader>tw', function() require('neotest').watch.toggle('%') end,             { buffer = buffer, desc = 'Watch all tests in file' })
-    map({ 'n' }, '<localleader>tw', function() require('neotest').watch.toggle(vim.loop.cwd()) end,  { buffer = buffer, desc = 'Watch all tests in workspace' })
-    map({ 'n' }, '<localleader>tk', function() require('neotest').run.stop() end,                    { buffer = buffer, desc = 'Stops (Kills) test execution' })
-    map({ 'n' }, '<localleader>ts', function() require('neotest').summary.toggle() end,              { buffer = buffer, desc = 'Toggle tests summary' })
-    map({ 'n' }, '<localleader>to', function() require('neotest').output_panel.toggle() end,         { buffer = buffer, desc = 'Toggle test output' })
-  end
-})
+map('n', '<leader>E', '<cmd>Neotree reveal<cr>', { desc = 'Reveal buffer file in explorer' })
 
 -- AI assistance
 map({ 'n' }, '<leader>aa', '<cmd>ChatGPT<cr>', { desc = 'Open AI chat window' })
@@ -189,4 +142,77 @@ map({ 'n', 'v' }, '<leader>ar', '<cmd>ChatGPTRun code_readability_analysis<cr>',
 map({ 'n', 'v' }, '<leader>ax', '<cmd>ChatGPTRun explain_code<cr>',              { desc = 'Explain the code'          })
 map({ 'n', 'v' }, '<leader>az', '<cmd>ChatGPTRun add_tests<cr>',                 { desc = 'Add tests'                 })
 
+-- language specific
+local function register_lsp_keymapping(args)
+  local buffer = args.buf
 
+  local groups = {
+    ['<localleader>']  = { name = '+More development shortcuts' },
+    ['<localleader>c'] = { name = '+Code' },
+    ['<localleader>d'] = { name = '+Debug' },
+    ['<localleader>t'] = { name = '+Test' }
+  }
+
+  vim.bo[buffer].omnifunc = 'v:lua.vim.lsp.omnifunc'
+  wk.register(groups, { buffer = buffer })
+
+  -- go to
+  map('n', 'gd', '<cmd>Lspsaga goto_definition<cr>',  { buffer = buffer, desc = 'Goto definition/declaration'    })
+  map('n', 'gr', '<cmd>Telescope lsp_references<cr>', { buffer = buffer, desc = 'Goto references' })
+  map('n', 'gR', '<cmd>Lspsaga finder<cr>',           { buffer = buffer, desc = 'Find references' })
+  map('n', 'gC', '<cmd>Lspsaga incoming_calls<cr>',   { buffer = buffer, desc = 'Goto references' })
+  map('n', 'gs', '<cmd>Telescope aerial<cr>',         { buffer = buffer, desc = 'Goto symbol' })
+
+  map('n', '<M-Down>', '<cmd>AerialNext<cr>', { buffer = buffer, desc = 'Goto next symbol' })
+  map('n', '<M-Up>',   '<cmd>AerialPrev<cr>', { buffer = buffer, desc = 'Goto previous symbol' })
+
+  map('n', '<leader><Tab>', '<cmd>ClangdSwitchSourceHeader<cr>', { buffer = buffer, desc = 'Alternate source/header' })
+
+  -- help and diagnostics
+  map('n', '<leader>ox', '<cmd>TroubleToggle document_diagnostics<cr>', { buffer = buffer, desc = 'Open diagnostics list window' })
+  map('n', ']d',         '<cmd>Lspsaga diagnostic_jump_next<cr>',       { buffer = buffer, desc = 'Next diagnostic'              })
+  map('n', '[d',         '<cmd>Lspsaga diagnostic_jump_prev<cr>',       { buffer = buffer, desc = 'Prev diagnostic'              })
+
+  map({ 'n'      }, 'K',     '<cmd>Lspsaga hover_doc<cr>', { buffer = buffer, desc = 'Show documentation' })
+  map({ 'n', 'x' }, '<C-k>', vim.lsp.buf.signature_help,   { buffer = buffer, desc = 'Signature Help' })
+
+  -- coding helpers
+  map({ 'n', 'v' }, '<localleader>cf', '<cmd>Format<cr>', { buffer = buffer, desc = 'Code format current line/selection' })
+  map({ 'n', 'v' }, '<F2>',            '<cmd>Format<cr>', { buffer = buffer, desc = 'Code format current line/selection' })
+
+  map({ 'n' }, '<localleader>cr', '<cmd>Lspsaga rename<cr>', { buffer = buffer, desc = 'Code rename symbol under cursor' })
+  map({ 'n' }, '<F3>',            '<cmd>Lspsaga rename<cr>', { buffer = buffer, desc = 'Code rename symbol under cursor' })
+
+  map({ 'n', 'v' }, '<localleader>ca', '<cmd>Lspsaga code_action<cr>', { buffer = buffer, desc = 'Code Action' })
+  map({ 'n', 'v' }, '<F4>',            '<cmd>Lspsaga code_action<cr>', { buffer = buffer, desc = 'Code action' })
+
+  map('n', '<localleader>cp', 'v:lua.MiniSplitjoin.operator("toggle") . " "', { buffer = buffer, expr = true, desc = 'Split/Join parameters' })
+  map('n', '<F5>',            'v:lua.MiniSplitjoin.operator("toggle") . " "', { buffer = buffer, expr = true, desc = 'Split/Join parameters' })
+  map('x', '<F5>',            '<cmd><C-u>lua MiniSplitjoin.toggle({ region = MiniSplitjoin.get_visual_region() })<cr>', { buffer = buffer, desc = 'Split/Join parameters' })
+
+  -- debugging
+  map({ 'n'      }, '<localleader>du', function() require('dapui').toggle({}) end,  { buffer = buffer, desc = 'Open debug windows'           })
+  map({ 'n', 'v' }, '<localleader>de', function() require('dapui').eval() end,      { buffer = buffer, desc = 'Eval expression under cursor' })
+  map({ 'n'      }, '<localleader>dc', function() require('dap').continue() end,    { buffer = buffer, desc = 'Continue'                     })
+  map({ 'n'      }, '<localleader>dp', function() require('dap').pause() end,       { buffer = buffer, desc = 'Pause'                        })
+  map({ 'n'      }, '<localleader>dt', function() require('dap').terminate() end,   { buffer = buffer, desc = 'Terminate'                    })
+  map({ 'n'      }, '<localleader>dr', function() require('dap').repl.toggle() end, { buffer = buffer, desc = 'Toogle REPL'                  })
+
+  map({ 'n' }, '<localleader>db', function() require('dap').toggle_breakpoint() end, { buffer = buffer, desc = 'Toggle breakpoint' })
+  map({ 'n' }, '<localleader>ds', function() require('dap').step_over() end, { buffer = buffer, desc = 'Step over' })
+  map({ 'n' }, '<localleader>di', function() require('dap').step_into() end, { buffer = buffer, desc = 'Step into' })
+  map({ 'n' }, '<localleader>do', function() require('dap').step_out() end, { buffer = buffer, desc = 'Step out' })
+
+  -- unit tests
+  map({ 'n' }, '<localleader>tt', function() require('neotest').run.run() end,                     { buffer = buffer, desc = 'Run test under cursor' })
+  map({ 'n' }, '<localleader>td', function() require('neotest').run.run({ strategy = 'dap' }) end, { buffer = buffer, desc = 'Debug test under cursor' })
+  map({ 'n' }, '<localleader>tr', function() require('neotest').run.run(vim.fn.expand('%')) end,   { buffer = buffer, desc = 'Run all tests in file' })
+  map({ 'n' }, '<localleader>tR', function() require('neotest').run.run(vim.fn.getcwd()) end,      { buffer = buffer, desc = 'Run all tests in workspace' })
+  map({ 'n' }, '<localleader>tw', function() require('neotest').watch.toggle('%') end,             { buffer = buffer, desc = 'Watch all tests in file' })
+  map({ 'n' }, '<localleader>tw', function() require('neotest').watch.toggle(vim.loop.cwd()) end,  { buffer = buffer, desc = 'Watch all tests in workspace' })
+  map({ 'n' }, '<localleader>tk', function() require('neotest').run.stop() end,                    { buffer = buffer, desc = 'Stops (Kills) test execution' })
+  map({ 'n' }, '<localleader>ts', function() require('neotest').summary.toggle() end,              { buffer = buffer, desc = 'Toggle tests summary' })
+  map({ 'n' }, '<localleader>to', function() require('neotest').output_panel.toggle() end,         { buffer = buffer, desc = 'Toggle test output' })
+end
+
+vim.api.nvim_create_autocmd('LspAttach', { callback = register_lsp_keymapping })

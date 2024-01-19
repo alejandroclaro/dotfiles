@@ -29,13 +29,40 @@ local function configure()
 
   configuration.edit_with_instructions = {
     keymaps = {
-      close               = "<C-c>",
-      accept              = "<C-y>",
-      toggle_diff         = "<C-d>",
-      toggle_settings     = "<C-o>",
-      toggle_help         = "<C-h>",
-      cycle_windows       = "<Tab>",
+      close = "<C-c>",
+      accept = "<C-y>",
+      toggle_diff = "<C-d>",
+      toggle_settings = "<C-o>",
+      toggle_help = "<C-h>",
+      cycle_windows = "<Tab>",
       use_output_as_input = "<C-a>"
+    }
+  }
+
+  configuration.chat = {
+    keymaps = {
+      close = "<C-c>",
+      yank_last = "<C-y>",
+      yank_last_code = "<C-k>",
+      scroll_up = "<C-b>",
+      scroll_down = "<C-f>",
+      new_session = "<C-n>",
+      cycle_windows = "<Tab>",
+      cycle_modes = "<C-m>",
+      next_message = "<C-j>",
+      prev_message = "<C-k>",
+      select_session = "<Space>",
+      rename_session = "r",
+      delete_session = "d",
+      draft_message = "<C-r>",
+      edit_message = "e",
+      delete_message = "d",
+      toggle_settings = "<C-o>",
+      toggle_sessions = "<C-p>",
+      toggle_help = "<C-h>",
+      toggle_message_role = "<C-r>",
+      toggle_system_role_open = "<C-s>",
+      stop_generating = "<C-x>"
     }
   }
 
