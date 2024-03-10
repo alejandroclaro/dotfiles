@@ -1,5 +1,4 @@
-export TERM=alacritty
-export TERMINAL=alacritty
+export TERMINAL="$TERM"
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"

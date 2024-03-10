@@ -57,7 +57,7 @@ local function configure()
     'mason',
     'neo-tree',
     'quickfix',
-   'trouble'
+    'trouble'
   }
 
   vim.g.lualine_laststatus = vim.o.laststatus

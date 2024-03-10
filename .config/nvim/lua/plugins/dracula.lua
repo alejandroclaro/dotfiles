@@ -15,9 +15,15 @@ local function configure()
   vim.api.nvim_set_hl(0, 'CmpItemAbbr', { fg = colors.white, bg = '#21222c' })
   vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = colors.cyan, bg = '#21222c' })
   vim.api.nvim_set_hl(0, 'CmpItemKind', { fg = colors.white, bg = '#21222c' })
+
+  vim.api.nvim_set_hl(0, 'illuminatedWordText', { link = 'Visual' })
+  vim.api.nvim_set_hl(0, 'illuminatedWordRead', { link = 'Visual' })
+  vim.api.nvim_set_hl(0, 'illuminatedWordWrite', { link = 'Visual' })
 end
 
 local function setup(use)
+  local after = { 'vim-illuminate' }
+
   use({ 'Mofiqul/dracula.nvim', config = configure })
 end
 

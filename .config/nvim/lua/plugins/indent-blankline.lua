@@ -22,13 +22,10 @@ local function configure()
   local exclude_types = {
     'dashboard',
     'help',
-    'lazyterm',
     'mason',
     'neo-tree',
     'notify',
-    'toggleterm',
-    'Trouble',
-    'trouble'
+    'toggleterm'
   }
 
   local configuration = {

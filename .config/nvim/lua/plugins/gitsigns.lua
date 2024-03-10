@@ -42,6 +42,7 @@ function _G.gitsigns_on_attach(buffer)
 
   -- Actions
   wk.register({ ['<leader>h'] = { name = 'Hunks (Git)' } }, { buffer = buffer })
+  wk.register({ ['<leader>h'] = { name = 'Hunks (Git)' } }, { buffer = buffer, mode='v' })
 
   map('n', '<leader>hr', gs.reset_hunk, { desc = 'Reset hunk' })
   map('v', '<leader>hr', _G.gitsigns_reset_hunk, { desc = 'Reset hunk' })

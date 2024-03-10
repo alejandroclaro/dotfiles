@@ -1,5 +1,5 @@
 local function configure()
-  require('lsp-progress').setup()
+  require('lsp-progress').setup({})
 end
 
 local function setup(use)

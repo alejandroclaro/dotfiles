@@ -14,7 +14,7 @@ local function configure()
     typescript = { 'eslint_d'     }
   }
 
-  local function try_lint()
+  local function try_lint(args)
     require('lint').try_lint()
   end
 
@@ -23,7 +23,7 @@ local function configure()
 end
 
 local function setup(use)
-  use({ 'mfussenegger/nvim-lint', config = configure })
+  use({ 'mfussenegger/nvim-lint', config = configure, after = 'nvim-lspconfig' })
 end
 
 return { setup = setup }

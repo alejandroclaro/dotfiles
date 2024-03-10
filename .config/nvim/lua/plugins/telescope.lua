@@ -1,9 +1,3 @@
-function _G.telescope_open_qflist_with_trouble(...)
-  require("telescope.actions").send_selected_to_qflist(...)
-  vim.cmd('cclose')
-  vim.cmd('Trouble quickfix')
-end
-
 local function configure()
   local telescope = require('telescope')
   local actions = require('telescope.actions')
@@ -13,14 +7,10 @@ local function configure()
 
   configuration.defaults.mappings = {
     i = {
-      ['<M-a>'] = actions.toggle_all,
-      ['<C-q>'] = _G.telescope_open_qflist_with_trouble,
-      ['<C-h>'] = actions.which_key
+      ['<M-a>'] = actions.toggle_all
     },
     n = {
-      ['<M-a>'] = actions.toggle_all,
-      ['<C-q>'] = _G.telescope_open_qflist_with_trouble,
-      ['<C-h>'] = actions.which_key
+      ['<M-a>'] = actions.toggle_all
     },
   }
 

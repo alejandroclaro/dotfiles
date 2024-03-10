@@ -7,7 +7,6 @@ function _G.mason_install_lsp_tools()
     'cssls',
     'eslint',
     'gradle_ls',
-    'grammarly',
     'html',
     'julials',
     'lua_ls',
@@ -15,14 +14,21 @@ function _G.mason_install_lsp_tools()
     'tsserver'
   }
 
-  require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
+  require('mason-lspconfig').setup({ ensure_installed = ensure_installed })
 end
 
 local function configure()
-  local configuration         = {}
-  local lsp                   = require('lspconfig')
+  local configuration = {}
+  local lsp = require('lspconfig')
+  local util = require('lspconfig.util')
   local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 
+  local typescript_options = {
+    root_dir = util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
+    settings = {
+      workingDirectory = { mode = 'auto' }
+    }
+  }
 
   if has_cmp then
     configuration.capabilities = cmp_nvim_lsp.default_capabilities()
@@ -35,15 +41,19 @@ local function configure()
   lsp.clojure_lsp.setup(configuration)
   lsp.cmake.setup(configuration)
   lsp.cssls.setup(configuration)
-  lsp.tsserver.setup(configuration)
-  -- lsp.eslint.setup(vim.tbl_deep_extend('force', configuration, { root_dir = _G.eslint_root_dir }))
+  lsp.tsserver.setup(vim.tbl_deep_extend('force', configuration, typescript_options))
+  lsp.eslint.setup(vim.tbl_deep_extend('force', configuration, typescript_options))
   lsp.gradle_ls.setup(configuration)
-  -- lsp.grammarly.setup(general)
   lsp.html.setup(configuration)
   lsp.java_language_server.setup(configuration)
   lsp.julials.setup(configuration)
   lsp.lua_ls.setup(configuration)
   lsp.pylsp.setup(configuration)
+
+  vim.fn.sign_define('DiagnosticSignError', { text = ' ', texthl = 'DiagnosticSignError', numhl = 'DiagnosticSignError' })
+  vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn', numhl = 'DiagnosticSignWarn' })
+  vim.fn.sign_define('DiagnosticSignHint', { text = ' ', texthl = 'DiagnosticSignHint', numhl = 'DiagnosticSignHint' })
+  vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo', numhl = 'DiagnosticSignInfo' })
 end
 
 local function setup(use)

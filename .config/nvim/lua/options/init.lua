@@ -11,7 +11,7 @@ vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.timeoutlen = 0
+vim.opt.timeoutlen = 100
 vim.opt.rnu = true
 vim.opt.numberwidth = 3
 vim.opt.textwidth = 0

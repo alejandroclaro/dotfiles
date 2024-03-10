@@ -33,7 +33,7 @@ local function configure()
       accept = "<C-y>",
       toggle_diff = "<C-d>",
       toggle_settings = "<C-o>",
-      toggle_help = "<C-h>",
+      toggle_help = "<C-_>",
       cycle_windows = "<Tab>",
       use_output_as_input = "<C-a>"
     }
@@ -59,7 +59,7 @@ local function configure()
       delete_message = "d",
       toggle_settings = "<C-o>",
       toggle_sessions = "<C-p>",
-      toggle_help = "<C-h>",
+      toggle_help = "<C-_>",
       toggle_message_role = "<C-r>",
       toggle_system_role_open = "<C-s>",
       stop_generating = "<C-x>"

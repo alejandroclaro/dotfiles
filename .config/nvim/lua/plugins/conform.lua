@@ -16,7 +16,7 @@ function _G.install_tools(tools)
       install_package(mason, t[1])
     end
   else
-    vim.notify('mason not installed!', 'error')
+    vim.notify('mason not installed!', vim.log.levels.ERROR)
   end
 end
 

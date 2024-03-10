@@ -197,6 +197,7 @@ for_window [class="Gcalculator"] floating enable, border normal
 for_window [class="Gpick"] floating enable, border normal
 for_window [class="Gnome-calculator"] floating enable
 for_window [title="^Microsoft Teams"] floating disable, border none
+for_window [title="^eVoting"] floating enable, border normal
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
